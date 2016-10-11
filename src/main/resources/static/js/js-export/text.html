@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+	<script src="jspdf.js"></script>
+	<script src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
+	 
+</head>
+<body>
+	<div class="noidung">
+	aaaaaaaaaaaaaaaaaaaaaaaaa
+	bbbbbbbbbbbbbbbbbbbb
+	</div>
+	<button type="button"> Click to Export</button>
+</body>
+
+	<script>
+		$(document).ready(function(){
+			var doc = new jsPDF(); 
+			var specialElementHandlers = { 
+			    '#editor': function (element, renderer) { 
+			        return true; 
+			    } 
+			};
+			$('button').click(function () { 
+			    doc.fromHTML($('.noidung').html(), 15, 15, { 
+			        'width': 190, 
+			            'elementHandlers': specialElementHandlers 
+			    }); 
+			    doc.save('sample-page.pdf'); 
+			});
+		});
+
+		
+	</script>
+</html>

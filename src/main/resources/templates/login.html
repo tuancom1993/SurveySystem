@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Survey Login</title>
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" type="text/css" href="../static/css/login.css" th:href="@{/css/login.css}"/>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+</head>
+<body>
+	<article>
+		<h1>LOGIN</h1>
+		<form method="post" th:action="@{/loginAction}" th:object="${loginForm}">
+			<h4> Username </h4>
+			<input id="username" type="text" th:field="${loginForm.userName}" placeholder="Enter username here..."/>
+			<div id="mess-err-username" class="mess-err"></div>
+			<h4> Password </h4>
+			<input id="password" type="password" th:field="${loginForm.passWord}" placeholder="Enter password here..."/>
+			<div id="mess-err-pass" class="mess-err"></div>
+			<button type="submit" class="btn submit"> LOGIN</button>
+			<div class="link-register"><a href="#" th:href="@{/register}"> &gt; Register To Member &lt;</a></div>
+			
+		</form>
+	</article>
+</body>
+	<script type="text/javascript" src="../static/js/validate.js" th:src="@{/js/validate.js}"></script>
+	<script type="text/javascript" src="../static/js/login.js" th:src="@{/js/login.js}"></script>
+</html>

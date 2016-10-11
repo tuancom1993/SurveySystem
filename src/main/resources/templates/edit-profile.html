@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Edit Profile</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../static/css/css-btr/bootstrap.min.css" th:href="@{/css/css-btr/bootstrap.min.css}"/> -->
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" href="../static/css/edit-profile.css" th:href="@{/css/edit-user.css}"/>
+	<!-- <link rel="stylesheet" href="../static/jquery-ui/jquery-ui.css" th:href="@{/jquery-ui/jquery-ui.css}"/> -->
+	<link rel="stylesheet" href="../static/datetimepicker/jquery.datetimepicker.css" th:href="@{/datetimepicker/jquery.datetimepicker.css}"/>
+</head>
+<body>
+	<a href="#" class="toTop"> </a>
+	<div class="wrap-all">
+		<!--/*/ <th:block th:include="/menu :: nav-menu"></th:block> /*/-->
+		<form th:action="@{/profile/edit}" th:method="post" enctype="multipart/form-data" th:object="${user}">
+		<article  class="w700">
+			<h1 class="view-title">Update Information</h1>
+			<section class="flex-box">
+				<aside class="as-avata">
+					<img class="avata" src="../static/img/avata/User.png" th:src="@{/img/avata/}+${user.avata}"/>
+					<div id="btn-wrap" class="btn btn-blue"> Choose Avatar <input id="btn-file" name="avataFile" type="file"/></div>
+				</aside>
+				<aside  class="as-information">
+					<table>
+						<tr>
+							<td>
+								<input id="fullname" type="text" th:field="${user.fullname}" placeholder="Enter your Full Name"/>
+								<div class="mess-err" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input id="username" type="text" th:value="${user.username}" placeholder="Enter your Username" disabled="" />
+								<div class="mess-err" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								<input id="male" type="radio" name="sex" value="1" th:checked="${user.sex}" th:field="${user.sex}"/> <label for="male"> Male </label>
+								<input id="female" type="radio" name="sex" value="0" th:checked="${user.sex}" th:field="${user.sex}"/> <label for="female"> Female </label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input id="date-picker" type="text" th:field="${user.birthday}" placeholder="yyyy/mm/dd"/>
+								<div class="mess-err" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input id="email" type="email" th:field="${user.email}" placeholder="Enter your Email"/>
+								<div class="mess-err" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input id="phone" type="text" th:field="${user.phone}" placeholder="Enter your Phone"/>
+								<div class="mess-err" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+							</td>
+						</tr>
+						<tr th:if="${session.userLogin.role.idrole}==1">
+							<td>
+								<input id="admin" type="radio" name="role" value="1" th:checked="${user.role.idrole}" th:field="${user.role.idrole}"/> <label for="admin"> Admin </label>
+								<input id="user" type="radio" name="role" value="2" th:checked="${user.role.idrole}" th:field="${user.role.idrole}"/> <label for="user"> User </label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="#"><button type="submit" class="btn btn-green"> Save Information </button></a>
+								<a href="#" th:href="@{/profile/view}"><button type="button" class="btn btn-yellow"> Back </button></a>
+							</td>
+						</tr>
+					</table>
+				</aside>
+			</section>
+		</article>
+		<input type="hidden" th:field="${user.username}"/>
+		</form>
+		<div style="height: 50px;"></div>
+		<div class="plush"></div>	
+	</div>
+	<footer>
+		
+	</footer>
+</body>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript" src="../static/datetimepicker/jquery.datetimepicker.full.js" th:src="@{/datetimepicker/jquery.datetimepicker.full.js}"></script> 
+	<script type="text/javascript">
+	// <![CDATA[
+	$(document).ready(function() {
+	    $('#btn-file').change(function(evt) {
+	    	readURL(this);
+	    });
+
+	    $("input").focus(function(){
+	    	$(this).parent().find(".mess-err").text("");
+	    });
+	   /* $("#date-picker").datepicker({changeMonth: true, changeYear: true, yearRange: '1950:2020' , dateFormat: 'yy/mm/dd' });*/
+	    $.datetimepicker.setLocale('en');
+	    $('#date-picker').datetimepicker({
+			timepicker:false,
+			dayOfWeekStart : 1,
+			format:'d-M-Y',
+			formatDate:'Y/m/d',
+			minDate:'1870/01/02', // yesterday is minimum date
+			maxDate:'2100/01/02' // and tommorow is maximum date calendar
+		});
+	    $(".menu .active").removeClass("active");
+		$(".menu .mn-profile a").addClass("active");
+	});
+
+	function readURL(input) {
+
+	    if ( input.files && input.files[0]) {
+	        var reader = new FileReader();
+
+	        reader.onload = function (e) {
+	            $('.avata').attr('src', e.target.result);
+	       }
+	    reader.readAsDataURL(input.files[0]);
+    }
+}
+	// ]]>
+</script>
+</html>

@@ -1,0 +1,304 @@
+
+article{
+	width: 100%;
+	height: 100%;
+}
+section{
+	width: 100%;
+	height: 0;
+	position: relative;
+	overflow: hidden;
+	-webkit-transition: all 1s;
+	-o-transition: all 1s;
+	transition: all 1s;
+	opacity: 0;
+
+}
+
+
+section .move{
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	cursor: pointer;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+	left: 50%;
+	margin-left: -20px;
+	opacity: 0.5;
+}
+
+section .move:hover{
+	-webkit-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	-o-transform: scale(1.1);
+	transform: scale(1.1);
+	box-shadow: 0 0 5px black;
+	opacity: 1;
+}
+
+section .up{
+	background-image: url(../img/common/move-up.svg);
+	background-size: 30px 30px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	top: 10px;
+}
+section .down{
+	background-image: url(../img/common/move-down.svg);
+	background-size: 30px 30px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	bottom: 10px;
+}
+
+
+div.cover{
+	width: 100%;
+	height: 40vh;
+	background: black;
+}
+
+h1.survey-title{
+	padding: 30px 0;
+	text-align: center;
+	font-size: 40px;
+	font-weight: 100;
+	/* font-family: marketing; */
+}
+
+#sec-head .description{
+	padding: 10px 50px;
+	max-height: 25vh;
+	overflow: auto;
+}
+
+.section-question{
+	align-items: center;
+}
+
+.section-question .wrap-if{
+	width: 100%;
+	text-align: center;
+}
+
+.section-question .question{
+	width: 100%;
+	padding: 10px;
+	text-align: center;
+	font-size: 35px;
+	font-weight: 100;
+	
+}
+
+.section-question .wrap-answers{
+	display: inline-block;
+	width: auto;
+	text-align: left;
+	margin: 60px auto 0 auto;
+}
+
+.wrap-answers input[type="text"]{
+	width: 300px;
+	border: none;
+	border-bottom: 1px solid rgba(0,0,0,0.5);
+	padding: 0 3px;
+	background: rgba(0,0,0,0);
+	font-size: 14px;
+}
+
+.wrap-answers .wrap-input-style{
+	width: 300px;
+	margin: auto;
+}
+
+.wrap-answers textarea{
+	width: 500px;
+	height: 150px;
+	border-radius: 5px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	padding: 10px;
+}
+
+.wrap-answer{
+	padding: 10px;
+	text-align: left;
+}
+
+.wrap-answer input[type="radio"],.wrap-answer input[type="checkbox"]{
+	margin-right: 10px;
+}
+
+.wrap-answer input[type="radio"] ~ label,.wrap-answer input[type="checkbox"] ~ label{
+	font-size: 16px;	
+}
+
+.mandatory .question:after{
+	content: " (*)";
+	font-size: 10px;
+	color: red;
+	font-weight: 100;
+	vertical-align: super;
+
+}
+
+.mess-err{
+	text-align: center;
+}
+
+.link-ss{
+	display: block;
+	text-align: center;
+	margin-top: 10px;
+}
+
+.infom-manadatory{
+	font-size: 12px;
+	color: red;
+	text-align: center;
+	margin-top: 10px;
+}
+
+.currentQuestion{
+	display: none;
+	position: fixed;
+	bottom: 10px;
+	left: 10px;
+	width: 50px;
+	height: 50px;
+	background: #FF5722 url(../img/common/gps.svg) center center no-repeat ;
+	border-radius: 100%;
+	color: white;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 45px;
+	z-index: 99;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.currentQuestion:hover{
+	background: #FF5722 url(../img/common/gps.svg) center center no-repeat ;
+	box-shadow: 0 0 10px black;
+	cursor: pointer;
+}
+
+section.current{
+	opacity: 1;
+	height: 100vh;
+	/* overflow: auto; */
+}
+
+.toTop{
+	display: block;
+}
+
+#btn-submit{
+	display: block;
+	width: auto;
+	padding: 10px 60px;
+	text-align: center;
+	background: transparent;
+	cursor: pointer;
+	font-size: 24px;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+#btn-submit:hover{
+	box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+	/* -webkit-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	-o-transform: scale(1.2);
+	transform: scale(1.2); */
+}
+
+#btn-submit:active{
+	box-shadow: 1px 1px 5px rgba(0,0,0,0.5) inset;
+}
+
+
+/*****************************Feed back***************************/
+#sec-done{
+	position: relative;
+}
+.btn-showFeedback{
+	position: absolute;
+	display: block;
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	background: rgba(0,0,0,0.5) url("../img/common/feedback.svg") center center no-repeat;
+	background-size: 18px;
+	left: 20px;
+	bottom: 20px;
+	cursor: pointer;
+}
+
+
+#partten{
+	display: none;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.3);
+	z-index: 1;
+}
+
+aside.feedbackblock-form{
+	display: none;
+	width: 500px;
+	height: 350px;
+	top: 50%;
+	left: 50%;
+	margin-top: -150px;
+	margin-left: -250px;
+	position: fixed;
+	z-index: 2;
+	background: white;
+	padding: 20px 30px;
+	border-radius: 10px;
+	box-shadow: 5px 5px 10px black;
+}
+
+aside.feedbackblock-form h1{
+	margin-bottom: 20px;
+}
+
+aside.feedbackblock-form p{
+	margin-bottom: 10px;
+
+}
+
+aside.feedbackblock-form textarea{
+	width: 400px;
+	max-width: 450px;
+	height: 130px;
+	max-height: 130px;
+	padding: 10px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	border-radius: 10px;
+	margin-bottom: 10px;
+}
+
+aside.feedbackblock-form .wrap-input-style{
+	margin-right: 30px;
+}
+
+div.wrap-input-style span{
+	color: rgba(0,0,0,0.5);
+}
+
+aside.feedbackblock-form .message-result{
+	color: red;
+	font-size: 12px;
+	padding-left: 30px;
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>View Profile</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../static/css/css-btr/bootstrap.min.css" th:href="@{/css/css-btr/bootstrap.min.css}"/> -->
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" href="../static/css/view-profile.css" th:href="@{/css/view-profile.css}"/>
+</head>
+<body>
+	<a href="#" class="toTop"> </a>
+	<div class="wrap-all">
+		<!--/*/ <th:block th:include="/menu :: nav-menu"></th:block> /*/-->
+		<article th:object="${user}" class="w700">
+			<h1 class="view-title">My Profile</h1>
+			<section class="flex-box">
+				<aside class="as-avata">
+					<img src="../static/img/avata/User.png" th:src="@{/img/avata/}+${user.avata}"/>
+					<button id="btn-pass" class="btn btn-blue"> Change Password </button>
+					<form id="form-pass" method="post" th:action="@{/profile/changepassword}" action="/profile/changepassword" th:object="${passForm}" class="wrap-password">
+
+						<h4> Change Password </h4>
+						<input id="pass" type="password" th:field="${passForm.password}" placeholder="Enter your new password"/>
+						<div id="mess-pass" class="mess-err"></div>
+						<input id="re-pass" type="password" th:field="${passForm.rePassword}" placeholder="Re-enter your new password"/>
+						<div id="mess-re-pass" class="mess-err"></div>
+
+						<span id="hide-form" href="#1"> Hide </span>
+					</form>
+				</aside>
+				<aside  class="as-information">
+					<table>
+						<tr>
+							<td>My Name:</td>
+							<td th:text="${user.fullname}">123</td>
+						</tr>
+						<tr>
+							<td>Username:</td>
+							<td th:text="${user.username}"></td>
+						</tr>
+						<tr th:if="${session.userLogin.Role.idrole} ==1">
+							<td>Role</td>
+							<td th:text="${user.role.namerole}"></td>
+						</tr>
+						<tr>
+							<td>Sex: </td>
+							<td th:text="${user.sex==1} ? 'Male' : 'Female'"></td>
+						</tr>
+						<tr>
+							<td>Birth Date:</td>
+							<td th:text="${#dates.format(user.birthday, 'dd-MMM-yyyy')}"></td>
+						</tr>
+						<tr>
+							<td>Email:</td>
+							<td th:text="${user.email}"></td>
+						</tr>
+						<tr>
+							<td>Phone:</td>
+							<td th:text="${user.phone}"></td>
+						</tr>
+						<tr th:if="${session.userLogin.Role.idrole} ==1">
+							<td>Block:</td>
+							<td th:text="${user.block}? 'Blocked' : 'No'"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td style="border-bottom: none;"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td style="border-bottom: none;">
+								<a href="#" th:href="@{/profile/edit}"><button class="btn btn-green"> Edit Profile </button></a>
+								
+							</td>
+						</tr>
+					</table>
+				</aside>
+			</section>
+			
+		</article>
+		<div style="height: 50px;"></div>
+		<div class="plush"></div>	
+	</div>
+	<footer>
+		
+	</footer>
+</body>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var bol = true;
+			$("#btn-pass").click(function(){
+				if(bol) {
+					$("#form-pass").fadeIn(500);
+					$(this).text("Apply New Password");
+					bol = false;
+				} else {
+					if($("#pass").val()!=$("#re-pass").val()) {
+						$("#mess-re-pass").text("Re-password is not correct");
+						return false;
+					}
+					$("#form-pass").submit();
+					bol = true;
+				}
+			});
+			$("#hide-form").click(function(){
+				$("#form-pass").fadeOut(500);
+				$("#btn-pass").text("Show Change Password");
+				bol = true;
+			});
+
+			$(".menu .active").removeClass("active");
+			$(".menu .mn-profile a").addClass("active");
+		});
+	</script>
+</html>

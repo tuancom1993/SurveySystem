@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:object="${form}">
+	<meta charset="UTF-8"/>
+	<title>Edit Survey</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../static/css/css-btr/bootstrap.min.css" th:href="@{/css/css-btr/bootstrap.min.css}"/> -->
+	<link rel="stylesheet" href="../static/jquery-ui/jquery-ui.css" th:href="@{/jquery-ui/jquery-ui.css}"/>
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" href="../static/css/edit-survey.css" th:href="@{/css/edit-survey.css}"/>
+	<style th:inline="text">
+		body{
+			background: [[${form.rgba}]]; 
+		}
+		.active-survey{
+			border-left: 30px solid [[${form.survey.maincolor}]];
+		}
+		.describe-survey:focus{
+			border-bottom: 1.5px solid [[${form.survey.maincolor}]];
+		}
+		input[type="text"]:focus{
+			border-bottom: 1.5px solid [[${form.survey.maincolor}]];
+		}	
+		.swap-index{
+			background-color: [[${form.survey.maincolor}]];
+		}
+
+	</style>
+</head>
+<body th:object="${form}">
+	<a href="#" class="toTop"> </a>
+	<div class="wrap-all">
+		<!--/*/ <th:block th:include="/menu :: nav-menu"></th:block> /*/-->
+		<header>
+			<div class="cover"
+			     th:if="${#strings.startsWith(form.survey.cover,'C')}" 
+				 th:style="|background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.3)), url(../img/cover/survey-cover/${form.survey.cover}) center center no-repeat;
+				 			background-size: 100% 100%;|">
+					
+			</div>
+			<div class="cover"
+			     th:if="${#strings.startsWith(form.survey.cover,'#')}" 
+				 th:style="|background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.3)), ${form.survey.cover} center center no-repeat;
+				 			background-size: 100% 100%;|">
+					
+			</div>
+		</header>
+		<article class="article-survey">
+			<form id="myform"  method="get">
+				<section class='section-survey w700'>
+					<ul class="survey-panel" >
+						<!-- <p style="text-align: center"> Add </p> -->
+						<li class="add-t">Sort Question</li>
+						<li class="add-r">Radio Question</li>
+						<li class="add-c">Check Question</li>
+						<li class="add-ta">Text Question</li>
+					</ul>
+				
+					<div class="wrap-title-survey">
+						<input type='text' class='title-survey' th:value="${form.survey.title}" placeholder='Enter the title....' />
+						<div class="mess-err text-center"></div>
+						<textarea class='describe-survey' th:text="${form.survey.surveydescribe}" placeholder='Enter the description of survey....'></textarea>
+						<div class="mess-err text-center"></div>
+					</div>
+					<div style="text-align: center;">
+						Choose kind of survey: 
+						<select class="kindsurvey" th:field="${form.survey.kindsurvey}">
+							<option value="0"> Basic Survey</option>
+							<option value="1"> Stepwise Survey </option>
+						</select> 
+					</div>
+					<div class="wrap-all-surveys">
+						<div class='wrap-survey'  style="display: block;" th:each="question : ${form.survey.questions}" th:switch="${question.kindquestion.idkindquestion}">
+
+							<div class='control-panel' th:case="1">
+								<ul>
+									<li class='delete-question'> </li>
+									<li class="notnull"> <div class="mandatory haveToolTip" th:classappend="${question.mandatory} ? manda-active : no"> <span class="toolTip"> Click to set question is Mandatory </span> </div> </li>
+								</ul>
+								<div class="clear"></div>
+							</div><!--/control-panel-->
+
+							<div class='control-panel' th:case="2">
+								<ul>
+									<li class='delete-question'> </li>
+									<li class="notnull"> <div class="mandatory haveToolTip" th:classappend="${question.mandatory} ? manda-active : no"> <span class="toolTip"> Click to set question is Mandatory </span> </div> </li>
+								</ul>
+								<div class="clear"></div>
+							</div><!--/control-panel-->
+
+							<div class='control-panel' th:case="4">
+								<ul> 
+									<li class='add-answear add-answear-radio'> </li> 
+									<li class='delete-question'> </li> 
+									<li class='notnull'>  <div class='mandatory' th:classappend="${question.mandatory} ? manda-active : no"></div> </li> 
+								</ul> 
+								<div class='clear'></div> 
+							</div><!--/control-panel--> 
+
+							<div class='control-panel' th:case="3">
+								<ul> 
+									<li class='add-answear add-answear-checkbox'> </li> 
+									<li class='delete-question'> </li> 
+									<li class='notnull'> <div class='mandatory' th:classappend="${question.mandatory} ? manda-active : no"></div> </li> 
+								</ul> 
+								<div class='clear'></div> 
+							</div><!--/control-panel--> 
+
+
+							<input type='text' 
+							       class='question' 
+							       th:value="${question.contentquestion}" 
+							       th:attr="data-idq=${question.idquestion}" 
+							       placeholder='Enter the question....'/> 
+							<div class="mess-err"></div> 
+
+
+
+							<div  th:if="${question.kindquestion.idkindquestion} == 1"
+								  class='wrap-answear text-box'>
+								<div class='wrap-answear-input text-box' th:each="answer : ${question.answers}">
+									<input class='answear' type='text' th:attr="data-ida=${answer.idanswer}" placeholder='Don&#39;t need enter here...' disabled="disable"/>	<span class="mess-err first"></span>
+								</div> <!--wrap-answear-input-->
+							</div> <!--/wrap-answear-->
+
+							<div  th:if="${question.kindquestion.idkindquestion} == 2"
+							      class='wrap-answear area' 
+							      th:each="answer : ${question.answers}">
+								<div class='wrap-answear-input area'>
+									<textarea class="answear" th:attr="data-ida=${answer.idanswer}" placeholder="Don't need enter here..." disabled=""></textarea>
+								</div> <!--wrap-answear-input-->
+							</div> <!--/wrap-answear-->
+							
+							<div th:if="${question.kindquestion.idkindquestion} == 4"
+							     class='wrap-answear radio'> 
+								<div class='wrap-answear-input radio'
+								     th:each="answer : ${question.answers}"> 
+									<input class='answear' type='text' th:attr="data-ida=${answer.idanswer}" th:value="${answer.content}" placeholder='Enter....'/> <span class="delete-input"> </span> <span class='mess-err'></span> 
+								</div> <!--wrap-answear-input--> 
+							</div> <!--/wrap-answear--> 
+
+							<div th:if="${question.kindquestion.idkindquestion} == 3"
+							     class='wrap-answear check-box'> 
+								<div class='wrap-answear-input check-box'
+								     th:each="answer : ${question.answers}"> 
+									<input class='answear' type='text' th:attr="data-ida=${answer.idanswer}" th:value="${answer.content}" placeholder='Enter....'/> <span class="delete-input"> </span> <span class='mess-err'></span> 
+								</div> <!--wrap-answear-input--> 
+							</div> <!--/wrap-answear--> 
+						<div class='swap-index'></div>
+						</div> <!--/wrap-survey-->
+					</div> <!-- /wrap-all-surveys -->
+				</section>
+			</form>
+
+			<section class='section-footer w700'>
+				<button class="btn btn-green btn-submit-survey" type="button" value="Login"> Edit </button>
+				<button class="btn btn-yellow" type="button" value="Cancel"> Return </button>
+			</section>	
+			
+			<input type="hidden" id="idsurvey" th:field="${form.survey.idsurvey}"/>
+			<input type="hidden" id="createdate" th:field="${form.survey.createdate}"/>
+			<input type="hidden" id="cover" th:field="${form.survey.cover}"/>
+			<input type="hidden" id="maincolor" th:field="${form.survey.maincolor}"/>
+
+			<aside id="logSuccess">
+				<h1 class="title-logS"> Edit Survey Successful!!! </h1>
+				<div class="content-logS">
+					<p> Your was edited successfuly survey <span class="survey-title-logS"> Survey abc </span>  </p>
+					<p> Let get this link: <a href="#" target="_blank"> link </a> or click it to Survey.</p>
+					<p> Thank you! </p>
+				</div>
+			</aside>
+			<aside id="deleteSuccess">
+				<h1>Message</h1>
+				<p> Delete question successful.</p>
+			</aside>
+			<div id="partten"></div>
+			<div id="partten2"></div>
+		</article>
+	<div class="clear"></div>
+		<div class="plush"></div>	
+	</div> <!-- /end wrap-all -->
+	<footer>
+		
+	</footer>
+</body>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/jquery-ui/jquery-ui.js" th:src="@{/jquery-ui/jquery-ui.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript" th:inline="javascript">
+	// <![CDATA[
+		
+	// ]]>
+	</script>
+	<script type="text/javascript" src="../static/js/edit-survey.js" th:src="@{/js/edit-survey.js}"></script>
+</html>

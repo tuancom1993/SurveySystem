@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Manage Tempalte</title>
+	
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" href="../static/css/manage-template.css" th:href="@{/css/manage-template.css}"/>
+</head>
+<body>
+	<a href="#" class="toTop"> </a>
+	<a class="add" href="/manage-template/create" th:href="@{/manage-template/create}"></a>
+	<div class="wrap-all">
+		<!--/*/ <th:block th:include="/menu :: nav-menu"></th:block> /*/-->
+		<article class="w1000" th:object="${form}">
+			<h1 class="title-manage">Manage Template</h1>
+			<div class="wrap-btn">
+				<a class="btn-create btn btn-submit" href="#" th:href="@{/manage-template/create}"> Create Template </a>
+			</div>
+			<ul class="menu-filter"> Filter tag: 
+				<li> <a class="filter on"> All </a> </li>
+				<li th:each="tag : ${form.Tags}"><a th:id="${tag.idtag}" th:class="filter"  th:attr="data-filter='.filter-tag-'+${tag.idtag}" th:text="${tag.tagname}"> All </a></li>
+			</ul>
+			<section class="all-template flex-box-center flex-wrap">
+
+				<div th:classappend="'filter-tag-'+${template.Tag.idtag}"
+					 class="wrap-template"  
+					 th:each="template : ${form.Templates}"
+					 th:style="|border-bottom: 3px solid ${template.maincolor} |">
+					<a href="#" th:href="@{/manage-template/edit(idtemplate=${template.idtemplate})}"> <img src="../static/img/cover/cover-common.jpg" th:src="@{/img/cover/}+${template.cover}"/> </a>
+					<div class="wrap-value">
+						<a href="#" th:href="@{/manage-template/edit(idtemplate=${template.idtemplate})}"><h1 th:text="${template.title}"> First Template </h1></a>
+						<h4> Create Date: <time th:text="${#dates.format(template.createdate, 'dd-MMM-yyyy')}"> 2016/03/28 </time> </h4> 
+						<p> <a th:id="${template.Tag.idtag}" th:class="filter" th:attr="data-filter='.filter-tag-'+${template.Tag.idtag}" href="#" th:text="${template.Tag.tagname}"> Movie </a></p>	
+					</div>
+				</div> <!-- /wrap-template -->
+				
+			</section>
+		</article>
+		<div class="plush"></div>	
+	</div> <!-- /end wrap-all -->
+	<footer>
+		
+	</footer>
+</body>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript">
+	// <![CDATA[
+		$(document).ready(function(){
+			$(".menu .active").removeClass("active");
+			$(".menu .mn-template a").addClass("active");
+			$(".menu .mn-manage").find('a').first().addClass("active");
+
+			$(".menu-filter .filter").click(function(){
+				var el = $(this);
+
+				$(".menu-filter .filter").removeClass("on");
+				el.addClass("on");
+
+				$(".wrap-template").removeClass("hidden");
+				data = el.attr("data-filter");
+				if(data){
+					$(".wrap-template").not(data).addClass("hidden");
+				}
+			});
+		});
+
+
+
+	// ]]>
+	</script>
+</html>

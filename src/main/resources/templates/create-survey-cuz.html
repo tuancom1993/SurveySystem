@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:object="${form}">
+	<meta charset="UTF-8"/>
+	<title>Create Survey</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../static/css/css-btr/bootstrap.min.css" th:href="@{/css/css-btr/bootstrap.min.css}"/> -->
+	<link rel="stylesheet" href="../static/jquery-ui/jquery-ui.css" th:href="@{/jquery-ui/jquery-ui.css}"/>
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" href="../static/css/create-survey-cuz.css" th:href="@{/css/create-survey-cuz.css}"/>
+	<style th:inline="text">
+		body{
+			background: [[${form.rgba}]]; 
+		}
+		.active-survey{
+			border-left: 30px solid [[${form.mainColor}]];
+		}
+		.describe-survey:focus{
+			border-bottom: 1.5px solid [[${form.mainColor}]];
+		}
+		input[type="text"]:focus{
+			border-bottom: 1.5px solid [[${form.mainColor}]];
+		}
+		.swap-index{
+			background-color: [[${form.mainColor}]];
+		}
+	</style>
+</head>
+<body th:object="${form}">
+	<a href="#" class="toTop"> </a>
+	<div class="wrap-all">
+		<!--/*/ <th:block th:include="/menu :: nav-menu"></th:block> /*/-->
+		<header>
+			<div class="cover" 
+				 th:style="|background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.3)), ${form.cover} center center no-repeat;
+				 background-size: 100% 100%;|">	
+				 <button type="button" class="btn btn-get-cover">Get Cover</button>
+			</div>
+		</header>
+		<article class="article-survey">
+			<form id="myform"  method="get">
+				<section class='section-survey w700'>
+					<ul class="survey-panel" >
+						<li class="add-t">Sort Question</li>
+						<li class="add-r">Radio Question</li>
+						<li class="add-c">Check Question</li>
+						<li class="add-ta">Text Question</li>
+					</ul>
+				
+					<div class="wrap-title-survey">
+						<input type='text' class='title-survey' ng-model='title' placeholder='Enter the title....' />
+						<div class="mess-err text-center"></div>
+						<textarea class='describe-survey' placeholder='Enter the description of survey....'></textarea>
+						<div class="mess-err text-center"></div>
+					</div>
+					<div style="text-align: center;">
+						Choose kind of survey: 
+						<select class="kindsurvey">
+							<option value="0"> Basic Survey</option>
+							<option value="1"> Survey Following Question </option>
+						</select> 
+					</div>
+					<div class="wrap-all-surveys">
+						<div class='wrap-survey active-survey'  style="display: block;">
+							<div class='control-panel'>
+								<ul>
+									<li class='delete-question'> </li>
+									<li class="notnull"> <div class="mandatory haveToolTip"> <span class="toolTip"> Click to set question is Mandatory </span> </div> </li>
+								</ul>
+								<div class="clear"></div>
+							</div><!--/control-panel-->
+							<input type='text' class='question' placeholder='Enter the question....'/> <div class="mess-err"></div> 
+							<div  class='wrap-answear text-box'>
+								<div class='wrap-answear-input text-box'>
+									<input class='answear' type='text' placeholder='Don&#39;t need enter here...' disabled="disable"/>	<span class="mess-err first"></span>
+								</div> <!--wrap-answear-input-->
+							</div> <!--/wrap-answear-->
+							<div class='swap-index'></div>
+						</div> <!--/wrap-survey-->
+
+						<div class='wrap-survey' style="display: block;"> 
+							<div class='control-panel'>
+								<ul> 
+									<li class='add-answear add-answear-radio'> </li> 
+									<li class='delete-question'> </li> 
+									<li class='notnull'>  <div class='mandatory'></div> </li> 
+								</ul> 
+								<div class='clear'></div> 
+							</div><!--/control-panel--> 
+							<input type='text' class='question' placeholder='Enter the question....'/> <div class='mess-err'></div>
+							<div class='wrap-answear radio'> 
+								<div class='wrap-answear-input radio'> 
+									<input class='answear' type='text' placeholder='Enter	....'/> <span class='mess-err first'></span> 
+								</div> <!--wrap-answear-input--> 
+							</div> <!--/wrap-answear--> 
+							<div class='swap-index'></div>
+						</div> <!--/wrap-survey-->
+						
+						<div class='wrap-survey'  style="display: block;"> 
+							<div class='control-panel'>
+								<ul> 
+									<li class='add-answear add-answear-checkbox'> </li> 
+									<li class='delete-question'> </li> 
+									<li class='notnull'> <div class='mandatory'></div> </li> 
+								</ul> 
+								<div class='clear'></div> 
+							</div><!--/control-panel--> 
+							<input type='text' class='question' placeholder='Enter the question....'/> <div class='mess-err'></div>
+							<div  class='wrap-answear check-box'> 
+								<div class='wrap-answear-input check-box'> 
+									<input class='answear' type='text' placeholder='Enter....'/> <span class='mess-err first'></span> 
+								</div> <!--wrap-answear-input--> 
+							</div> <!--/wrap-answear--> 
+							<div class='swap-index'></div>
+						</div> <!--/wrap-survey-->
+					</div> <!-- /wrap-all-surveys -->
+				</section>
+			</form>
+
+			<section class='section-footer w700'>
+				<button class="btn btn-green btn-submit-survey" type="button" value="Login"> Save </button>
+				<button class="btn btn-yellow" type="button" value="Cancel"> Return Home </button>
+			</section>	
+
+			<input type="hidden" id="cover" th:field="${form.cover}"/>
+			<input type="hidden" id="maincolor" th:field="${form.mainColor}"/>
+			<input type="hidden" id="idTemplate" th:field="${form.idTemplate}"/>
+
+			<aside id="logSuccess">
+				<h1 class="title-logS"> Create Survey Successful!!! </h1>
+				<div class="content-logS">
+					<p> Your was created successfuly survey <span class="survey-title-logS"> Survey abc </span>  </p>
+					<p> Let get this link: <a href="#" target="_blank"> link </a> or click it to Survey.</p>
+					<p> Thank you! </p>
+				</div>
+			</aside>
+
+			<aside id="logChooseCover">
+				<h1> Get Cover </h1>
+				<div class="wrap-all-color flex-box-space-around flex-wrap">
+					<div class="wrap-color">
+						<div class="color bgRed"></div>
+						<p class="name-color">Red</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgPink"></div>
+						<p class="name-color">Pink</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgPurple"></div>
+						<p class="name-color">Purple</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgDeepPurple"></div>
+						<p class="name-color">Deep Purple</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgIndigo"></div>
+						<p class="name-color">Indigo</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgBlue"></div>
+						<p class="name-color">Blue</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgLightBlue"></div>
+						<p class="name-color">Light Blue</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgCyan"></div>
+						<p class="name-color">Cyan</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgTeal"></div>
+						<p class="name-color">Teal</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgGreen"></div>
+						<p class="name-color">Green</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgLightGreen"></div>
+						<p class="name-color">Light Green</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgLime"></div>
+						<p class="name-color">Lime</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgYellow"></div>
+						<p class="name-color">Yellow</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgAmber"></div>
+						<p class="name-color">Amber</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgOrange"></div>
+						<p class="name-color">Orange</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgDeepOrange"></div>
+						<p class="name-color">Deep Orange</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgBrown"></div>
+						<p class="name-color">Brown</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgGrey"></div>
+						<p class="name-color">Grey</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgBlueGrey"></div>
+						<p class="name-color">Blue Grey</p>
+					</div>
+					<div class="wrap-color">
+						<div class="color bgBlack"></div>
+						<p class="name-color">Black</p>
+					</div>
+				</div>
+			</aside>
+			<div id="partten"></div>
+			<div id="partten2"></div>
+		</article>
+	<div class="clear"></div>
+		<div class="plush"></div>	
+	</div> <!-- /end wrap-all -->
+	<footer>
+		
+	</footer>
+</body>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/jquery-ui/jquery-ui.js" th:src="@{/jquery-ui/jquery-ui.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript" th:inline="javascript">
+	// <![CDATA[
+		
+	// ]]>
+	</script>
+	<script type="text/javascript" src="../static/js/create-survey-cuz.js" th:src="@{/js/create-survey-cuz.js}"></script>
+</html>

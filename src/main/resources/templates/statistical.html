@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Statistic</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../static/css/css-btr/bootstrap.min.css" th:href="@{/css/css-btr/bootstrap.min.css}"/> -->
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" href="../static/css/statistical.css" th:href="@{/css/statistical.css}"/>
+</head>
+<body th:object="${form}">
+	<a href="#" class="toTop"> </a>
+	<div class="wrap-all">
+		<!--/*/ <th:block th:include="/menu :: nav-menu"></th:block> /*/-->
+		<header>
+			
+		</header>
+		<article class="w900">
+			<section class="statis-template">
+				<h2 class="ribbon"> Template has been use </h2>
+				<div class="wrap-chart w700">
+					<table id="table-template-chart" class="table-template">
+						<thead>
+							<tr>
+								<th></th>
+								<th th:each="template : ${form.templates}" th:text="${template.title}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>Number</th>
+								<td th:each="template : ${form.templates}" th:text="${template.indexselect}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</article>
+		<div class="plush"></div>	
+	</div> <!-- /end wrap-all -->
+	<footer>
+		
+	</footer>
+</body>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript" src="../static/js/js-chart/highcharts.js" th:src="@{/js/js-chart/highcharts.js}"></script>
+	<script type="text/javascript" src="../static/js/js-chart/highcharts-3d.js" th:src="@{/js/js-chart/highcharts-3d.js}"></script>
+	<script type="text/javascript" src="../static/js/js-chart/modules/data.js" th:src="@{/js/js-chart/modules/data.js}"></script>
+	<script type="text/javascript" src="../static/js/js-chart/modules/exporting.js" th:src="@{/js/js-chart/modules/exporting.js}"></script>
+	<script type="text/javascript" src="../static/js/statistical.js" th:src="@{/js/statistical.js}"></script>
+	<script type="text/javascript">
+	// <![CDATA[
+		$(document).ready(function(){
+			
+		});
+	// ]]>
+	</script>
+</html>

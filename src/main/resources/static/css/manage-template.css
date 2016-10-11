@@ -1,0 +1,145 @@
+
+
+article{
+	padding: 40px 0;
+}
+
+h1.title-manage{
+	font-size: 36px;
+	font-weight: 100;
+}
+
+.wrap-btn{
+	text-align: center;
+	margin: 20px;
+}
+
+.btn-create{
+	display: inline-block;
+}
+
+.filter{
+	cursor: pointer;
+}
+
+.on{
+	background-color: rgba(144,202,249,0.6);
+	border-radius: 5px;
+}
+
+.menu-filter{
+	text-align: center;
+	margin: 20px 0;
+	font-size: 13px;
+}
+.menu-filter li{
+	display: inline-block;
+	padding: 0 5px;
+	border-right: 1px solid rgb(0,145,234);
+}
+
+.menu-filter li:last-child{
+	border-right: none;
+}
+
+.menu-filter li a{
+	font-size: 12px;
+	padding: 1px 5px;
+}
+
+.menu-filter li a:hover{
+	text-decoration: underline;
+}
+
+.all-template{
+
+}
+
+.all-template .wrap-template{
+	width: 250px;
+	height: auto;
+	margin: 10px 10px;
+	padding-bottom: 10px;
+	border: 1px solid rgba(0,0,0,0.3);
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.hidden{
+	-webkit-transform: scale(0);
+	-ms-transform: scale(0);
+	-o-transform: scale(0);
+	transform: scale(0);
+}
+
+.all-template .wrap-template:hover{
+	box-shadow: 5px 5px 10px black;
+	-webkit-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	-o-transform: scale(1.05);
+	transform: scale(1.05);
+}
+
+.all-template .wrap-template img{
+	width: 100%;
+	height: 100px;
+}
+
+.wrap-value{
+	padding: 0 20px;
+}
+
+.wrap-value a:hover{
+	text-decoration: underline;
+}
+
+.wrap-value h1{
+	margin: 10px 0;
+}
+
+.wrap-value h4{
+	font-weight: 100;
+	font-size: 14px;
+}
+
+.wrap-value p{
+	margin-top: 10px;
+	font-size: 14px;
+}
+
+.wrap-value p a{
+	font-style: italic;
+	font-size: 10px;
+    padding: 3px 8px 3px 12px;
+    color: white;
+    border-radius: 100px 0 0 100px;
+    background: rgba(0,0,0,0.6) url(../img/common/circle.svg) 2px 4px no-repeat;
+    background-size: 8px;
+    
+}
+
+/**********************************************Add******************************************/
+.add{
+	position: fixed;
+	bottom: 10px;
+	left: 10px;
+	display: block;
+	width: 50px;
+	height: 50px;
+	background: rgba(244,67,54,0.6) url(../img/common/add.svg) center center no-repeat ;
+	border-radius: 100%;
+	color: white;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 45px;
+	z-index: 99;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.add:hover{
+	background: rgba(244,67,54,1) url(../img/common/add.svg) center center no-repeat ;
+	box-shadow: 0 0 10px black;
+}

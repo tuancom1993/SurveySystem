@@ -1,0 +1,44 @@
+article{
+	margin: 50px 0 50px 0;
+}
+
+article h1{
+
+}
+
+.wrap-table{
+	display: block;
+	margin-top: 50px;
+}
+
+.wrap-table thead tr{
+	background: rgba(51,122,183,0.8);
+}
+
+.wrap-table tbody tr:nth-child(even){
+	background: rgba(0,0,0,0.1);
+}
+
+.img-edit{
+	width: 25px;
+	height: 25px;
+}
+
+.wrap-table tbody tr .td-user-infor{
+	position: relative;
+}
+
+.wrap-table tbody tr td aside{
+	position: absolute;
+	right: -10px;
+	padding: 10px;
+	background: rgba(199,199,199,1);
+	border-radius: 5px;
+	box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+	z-index: 1;
+}
+
+.wrap-table tbody tr td aside img{
+	width: 60px;
+	height: 60px;
+}

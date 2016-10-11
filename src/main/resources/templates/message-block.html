@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Blocked</title>
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" href="../static/css/message-block.css" th:href="@{/css/message-block.css}"/>
+</head>
+<body>
+	<header>
+		
+	</header>	
+	<section class="w600 message-block">
+		<h1>Sorry!</h1>
+		<p> Your account have been blocked. Please <a class="show-feed-form">give feedback</a> for us to get more information!</p>
+		<span> <a href="/homepage"></a> Back home</span>
+	</section>
+	
+	<div id="partten"></div>
+	<aside class="feedbackblock-form">
+		<h1>Feedback</h1>
+		<p>Please give your feedback if you have anything request about your account.</p>
+		<textarea id="area-feedback" placeholder="Your feedback"></textarea>
+		<div class="flex-box">
+			<div class="wrap-input-style">
+			<input id="name" type="text"  required="" />
+			<span> Your Name </span>
+		</div>
+		<div class="wrap-input-style">
+			<input id="contact" type="text" required="" />
+			<span> Email or Phone</span>
+		</div>
+		</div>
+		<button class="btn btn-submit btn-giveFeedback" type="button"> Give Feedback </button>
+		<span class="message-result">  </span>
+	</aside>
+
+	
+</body>
+<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript" src="../static/js/message-block.js" th:src="@{/js/message-block.js}"></script>
+</html>

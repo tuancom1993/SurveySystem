@@ -1,0 +1,842 @@
+/**************************************reset************************************************/
+@font-face {
+	font-family: Comfortaa;
+	src:url(font/comfortaa/Comfortaa-Regular.ttf);
+}
+
+@font-face {
+	font-family:marketing;
+	src:url(../font/marketing/MarketingScript.ttf);
+}
+
+*{
+	margin: 0;
+	padding: 0;
+	outline: none;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+*:focus{
+	outline: none !important;
+}
+
+
+ul,li,a{
+	text-decoration: none;
+	list-style: none;
+	outline: none;
+}
+
+textarea{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body, html{
+	height: 100%;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+}
+
+.clear{
+	clear: both;
+}
+
+/**************************************width************************************************/
+.w500{
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.w600{
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.w700{
+	width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.w800{
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.w900{
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.w1000{
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+/*****************************************wrap to footer alway bottom************************************************/
+.wrap-all{
+	min-height: 100%;
+}
+
+.plush{
+	width: 100%;
+	padding-bottom: 150px;
+}
+
+footer{
+	width: 100%;
+	height: 150px;
+	margin-top: -150px;
+	background-image: -webkit-linear-gradient(#666663, #000);
+	background-image: -o-linear-gradient(#666663, #000);
+	background-image: linear-gradient(#666663, #000);
+}
+
+/***********************************************link*************************************/
+
+a{
+	color: rgb(0,145,234);
+}
+
+a:hover{
+	
+}
+
+/*****************************************menu************************************************/
+ul.menu a{
+	text-decoration: none !important;
+}
+
+ul.menu a:hover{
+	text-decoration: none !important;
+}
+
+ul.menu .active{
+	text-shadow: 0 0 10px white;
+}
+
+ul.menu .active:after{
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 2px;
+	background: #FF6F00;
+	bottom: -5px;
+	left: 0;
+	opacity: 1;
+}
+
+.over-nav{
+	height: 60px;
+}
+
+nav{
+	
+}
+ul.menu{
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	display: block;
+	text-align: center;
+	width: 100%;
+	background: rgba(0,137,123,1);
+	font-size: 0;
+	-webkit-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	transition: all 0.4s;
+	z-index: 1;
+}
+
+.menu li{
+	display: inline-block;
+	padding-left: 5px;
+	position: relative;
+	
+}
+
+.menu .mnhome{
+	background: url(../img/common/home.svg) left center no-repeat;
+}
+.menu li a{
+	font-size: 20px;
+	color: white;
+	font-weight: 100;
+	line-height: 60px;
+	margin: 0 20px;
+	position: relative;
+	-webkit-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	transition: all 0.4s;
+}
+.menu li a:hover{
+	text-shadow: 0 0 10px white;
+}
+
+.menu li a:before{
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 2px;
+	background: #FF6F00;
+	bottom: -5px;
+	left: 0;
+	opacity: 0;
+	-webkit-transition:  0.5s;
+	-o-transition:  0.5s;
+	transition:  0.5s;
+}
+
+.menu li a:hover:before{
+	width: 100%;
+	opacity: 1;
+	
+}
+
+
+.menu li .ul-lv1{
+	display: block;
+	max-height: 0;
+	position: absolute;
+	left: 0;
+	top: 60px;
+	overflow: hidden;
+	background: rgba(0,137,123,0.8);
+	-webkit-transition: max-height 0.3s, opacity 1s;
+	-o-transition: max-height 0.3s, opacity 1s;
+	transition: max-height 0.3s, opacity 1s;
+	
+}
+.menu li .ul-lv1 li{
+	display: block;
+	min-width: 200px;
+	border-bottom: 1px solid rgba(150, 150, 150, 0.15);
+}
+
+.menu li .ul-lv1 li a{
+	font-size: 15px;
+	line-height: 45px;
+}
+
+.menu li:hover .ul-lv1{
+	max-height: 250px;
+	opacity: 1;
+	
+}
+
+.ul-lv1 li .ul-lv2{
+	opacity: 0;
+	width: 0;
+	display: block;
+	position: absolute;
+	left: 200px;
+	top: 0;
+	background: rgba(0,0,0,0.6);
+}
+
+.ul-lv1 li:hover .ul-lv2{
+	width: 200px;
+	-webkit-transition: all 0.6s;
+	-o-transition: all 0.6s;
+	transition: all 0.6s;
+	box-shadow: 0 0 5px white;
+}
+
+/***********************menu resize when scroll************/
+
+ul.menu.min{
+	background: rgba(0,0,0,0.7);
+}
+
+ul.menu.min li a{
+	line-height: 40px;
+	font-size: 16px;
+
+}
+
+ul.menu.min li ul.ul-lv1{
+	top: 40px; 
+	background:rgba(0,0,0,0.6);
+
+}
+
+ul.menu.min li ul.ul-lv1 li a{
+	font-size: 13px;
+	line-height: 35px;
+}
+
+/*************************************************input**************************************************/
+select{
+	width: auto;
+	height: 30px;
+	font-size: 14px;
+	padding: 0 10px;
+	background-color: transparent;
+	border-radius: 5px;
+	border: 1px solid rgba(0,0,0,0.3);
+}
+
+/*************************************************button**************************************************/
+
+button, input[type="button"], input[type="submit"]{
+	background-color: none;
+	border: none;
+	outline: none;	
+}
+
+.btn{
+	padding: 10px;
+	font-size: 14px;
+	color: white;
+	font-weight: 100;
+	border-radius: 5px;
+}
+
+.btn:hover{
+	color: white;
+}
+
+.btn-default{
+	color: black;
+}
+
+.btn-default:hover{
+	color: black;
+}
+
+.btn-default:active{
+	color: black;
+}
+
+.btn-submit{
+	background-color: rgb(76,175,80);
+}
+
+.btn-submit:hover{
+	box-shadow: 0 0 10px  rgb(76,175,80);
+	
+
+}
+
+.btn-green{
+	background-color: rgb(76,175,80);
+}
+
+.btn-green:hover{
+	box-shadow: 0 0 10px  rgb(76,175,80);
+	
+}
+
+.btn-blue{
+	background-color: rgb(3,169,244);
+}
+
+.btn-blue:hover{
+	box-shadow: 0 0 10px  rgb(3,169,244);
+	
+}
+
+.btn-red{
+	background-color: rgba(226,34,34,1);
+}
+
+.btn-red:hover{
+	box-shadow: 0 0 10px  rgba(226,34,34,1);
+	
+}
+
+.btn-yellow{
+	background-color: rgb(251,192,45);
+}
+
+.btn-yellow:hover{
+	box-shadow: 0 0 10px  rgb(251,192,45);
+	
+}
+
+.btn-black{
+	background-color: black;
+}
+
+.btn-black:hover{
+	box-shadow: 0 0 10px  black;
+	
+}
+
+.btn-black-2{
+	background-color: #c4c4c4;
+}
+
+.btn-black-2:hover{
+	box-shadow: 0 0 10px  #c4c4c4;
+	
+}
+
+.btn-none-br{
+	border-radius: 0;
+}
+
+.btn:active{
+	-webkit-transform: scale(0.96);
+	-ms-transform: scale(0.95);
+	-o-transform: scale(0.95);
+	transform: scale(0.95);
+	box-shadow: 0 0 5px rgba(0,0,0,0.5) inset;
+	text-shadow: none;
+	color: white;
+}
+
+/**********************************************************Flex-box*********************************************/
+.flex-box{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+
+.flex-box-center{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: center;
+}
+
+.flex-box-space-around{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: space-around;
+}
+
+.flex-box-space-between{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: space-between;	
+}
+
+.flex-wrap{
+	-webkit-flex-wrap: wrap;
+	-moz-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	-o-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+
+/*********************************************************Tool tip******************************************/
+.haveToolTip:hover{
+	position: relative;
+}
+
+.toolTip{
+	display: block;
+	position: absolute;
+	visibility: hidden;
+	text-align: center;
+	background-color: #5F5F5F;
+	border-radius: 15px;
+	color: white;
+	box-shadow: 0 0 7px black;
+	width: 0;
+	height: 0;
+	top: -45px;
+	left: 10px;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s;
+	-o-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+}
+
+.toolTip:after{
+	position: absolute;
+	display: block;
+	content: "";
+	width: 0;
+	height: 0;
+	border: 8px solid transparent;
+	border-top: 8px solid #5F5F5F;
+	bottom: -15px;
+	left: 20px;
+}
+
+.haveToolTip:hover .toolTip{
+	padding: 8px;
+	width: auto;
+	height: auto;
+	visibility: visible;
+	opacity: 1;
+}
+
+/**********************************************TO TOP******************************************/
+.toTop{
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	display: none;
+	width: 50px;
+	height: 50px;
+	background: rgba(103,58,183,0.6) url(../img/common/up-24.ico) center center no-repeat ;
+	border-radius: 100%;
+	color: white;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 45px;
+	z-index: 99;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.toTop:hover{
+	background: rgba(103,58,183,1) url(../img/common/up-24.ico) center center no-repeat ;
+	box-shadow: 0 0 10px black;
+}
+
+/**********************************************Add******************************************/
+.add{
+	position: fixed;
+	bottom: 10px;
+	left: 10px;
+	display: block;
+	width: 50px;
+	height: 50px;
+	background: rgba(244,67,54,0.6) url(../img/common/add.svg) center center no-repeat ;
+	border-radius: 100%;
+	color: white;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 45px;
+	z-index: 99;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.add:hover{
+	background: rgba(244,67,54,0.9) url(../img/common/add.svg) center center no-repeat ;
+	box-shadow: 0 0 10px black;
+}
+
+
+/**********************************************MESSAGE FORM***********************************/
+.message-form{
+	width: 800px;
+	margin: 200px auto;
+	padding: 20px 50px;
+	box-shadow: 5px 5px 10px rgba(0,0,0,0.8);
+}
+
+.message-form h1, .message-form p{
+	color: white;
+}
+
+.message-form p{
+	margin-top: 20px;
+}
+
+.register-successful{
+	background: #44a51d;
+}
+
+.mess-err{
+	color: red;
+	font-size: 12px;
+}
+
+/*************************************************Modal Bootstrap*********************************************/
+.modal-body p{
+	color: black;
+}
+
+/**********************************************color********************************/
+.bgRed{
+	background-color: #F44336;
+}
+
+.bgPink{
+	background-color: #E91E63;
+}
+
+.bgPurple{
+	background-color: #9C27B0;
+}
+
+.bgDeepPurple{
+	background-color: #673AB7;
+}
+
+.bgIndigo{
+	background-color: #3F51B5;
+}
+
+.bgBlue{
+	background-color: #2196F3;
+}
+
+.bgLightBlue{
+	background-color: #03A9F4;
+}
+
+.bgCyan{
+	background: #00BCD4;
+}
+
+.bgTeal{
+	background-color: #009688;
+}
+
+.bgGreen{
+	background-color: #4CAF50;
+}
+
+.bgLightGreen{
+	background-color: #8BC34A;
+}
+
+.bgLime{
+	background-color: #CDDC39;
+}
+
+.bgYellow{
+	background-color: #FFEB3B;
+}
+
+.bgAmber{
+	background-color: #FFC107;
+}
+
+.bgOrange{
+	background: #FF9800;
+}
+
+.bgDeepOrange{
+	background-color: #FF5722;
+}
+
+.bgBrown{
+	background-color: #795548;
+}
+
+.bgGrey{
+	background-color: #9E9E9E;
+}
+
+.bgBlueGrey{
+	background-color: #607D8B;
+}
+
+.bgBlack{
+	background-color: #000000;
+}
+
+.bgWhite{
+	background-color: #ffffff;
+}
+
+
+/********************************************INPUT STYLE*******************************/
+div.wrap-input-style{
+	position: relative;
+	padding: 15px 0;
+	width: 200px;
+}
+
+div.wrap-input-style input{
+	padding: 0 2px;
+	border: none;
+	border-bottom: 1px solid rgba(0,0,0,0.3);
+	-webkit-transition: all 1s;
+	-o-transition: all 1s;
+	transition: all 1s;
+	background: rgba(0,0,0,0);
+	width: 100%;
+}
+
+
+div.wrap-input-style input:valid{
+	border-color: green;
+}
+
+div.wrap-input-style input:focus{
+	outline: none;
+	border-color:  #f44336;
+}
+
+
+div.wrap-input-style span{
+	position: absolute;
+	-webkit-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	transition: all 0.4s;
+	top: 15px;
+	left: 2px;
+	font-size: 14px;
+	color: rgba(0,0,0,0.8);
+	z-index: -1;
+}
+
+div.wrap-input-style input:valid ~ span{
+	top: 0;
+	left: 2px;
+	font-size: 12px;
+	color: green;
+	margin-top: 0;
+	z-index: 1;
+}
+
+div.wrap-input-style input:focus ~ span{
+	top: 0;
+	left: 2px;
+	font-size: 12px;
+	color:  #f44336;
+	margin-top: 0;
+	z-index: 1;
+}
+
+
+/* div.wrap-input-style input:invalid ~ span{
+	top: 17px;
+	left: 2px;
+	font-size: 14px;
+	color: red;
+} */
+
+
+
+.wrap-input-rc-style{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	box-sizing: border-box;
+	vertical-align: -4px;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+.wrap-input-rc-style input{
+	display: none;
+}
+
+.wrap-input-rc-style label:hover{
+	cursor: pointer;
+}
+
+.wrap-input-rc-style input[type="radio"] ~ label{
+	display: block;
+	width: 100%;
+	height: 100%;
+	border: 2px solid rgba(0,0,0,0.5);
+	border-radius: 100%;
+	padding: 33%;
+	background: rgba(0,0,0,0);
+	box-sizing: border-box;
+	background-clip: content-box;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.wrap-input-rc-style input[type="radio"]:checked ~ label{
+	-webkit-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	transition: all 0.2s;
+	padding: 10%;
+	background: red;
+	background-clip: content-box;
+	-webkit-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+}
+
+/*checkbox*/
+.wrap-input-rc-style input[type="checkbox"] ~ label{
+	display: block;
+	width: 100%;
+	height: 100%;
+	border: 2px solid rgba(0,0,0,0.5);
+	border-radius: 3px;
+	padding: 33%;
+	background: rgba(0,0,0,0);
+	box-sizing: border-box;
+	background-clip: content-box;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+	position: relative;
+	-webkit-transform: rotate(-180deg);
+	-ms-transform: rotate(-180deg);
+	-o-transform: rotate(-180deg);
+	transform: rotate(-180deg);
+}
+
+
+.wrap-input-rc-style input[type="checkbox"] ~ label:after{
+	width: 6px;
+	height: 11px;
+	content: "";
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -3px;
+	margin-top: -7px;
+	background: transparent;
+	border: none;
+	box-sizing: border-box;
+	-webkit-transition: opacity 0.5s;
+	-o-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+	opacity: 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.wrap-input-rc-style input[type="checkbox"]:checked ~ label{
+	padding: 1px;
+	background: green;
+ 	border-color: green;
+	background-clip: content-box;
+		-webkit-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+	
+}
+
+.wrap-input-rc-style input[type="checkbox"]:checked ~ label:after{
+	opacity: 1;
+	width: 6px;
+	height: 11px;
+	border-right: 2px solid white;
+	border-bottom: 2px solid white;
+}
+/*********************************partten************************************/
+#partten{
+	display: none;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 101;
+	background-color: rgba(0,0,0,0.3);
+	top: 0;
+	left: 0;
+}

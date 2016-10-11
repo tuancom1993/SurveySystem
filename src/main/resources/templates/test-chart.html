@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="divchart" style="width: 800px; margin: auto;" ></div>
+
+	<div class="divchart2" style="width: 800px; margin: auto;" ></div>
+
+	<div class="divchart3 abc" style="width: 800px; margin: auto;" ></div>
+	<table id="datatable">
+	    <thead>
+	        <tr>
+	            <th></th>
+	            <th> (123) </th>
+	            <th>Girl friend</th>
+	            <th>Other</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr>
+	            <th>Number: </th>
+	            <td>3</td>
+	            <td>4</td>
+	            <td>12</td>
+	        </tr>
+	    </tbody>
+	</table>
+
+	<input type="text" id="test" value=" this is test input. Wakakakaka" data-id="null">
+
+</body>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript" src="../static/js/js-chart/highcharts.js" th:src="@{/js/js-chart/highcharts.js}"></script>
+	<script type="text/javascript" src="../static/js/js-chart/modules/data.js" th:src="@{/js/js-chart/modules/data.js}"></script>
+	<script type="text/javascript" src="../static/js/js-chart/modules/exporting.js" th:src="@{/js/js-chart/modules/exporting.js}"></script>
+	<script>
+		$(document).ready(function(){
+
+			console.log($("#test").val() + ' | data-id: '+$("#test").attr("data-id"));
+
+			$('.divchart').highcharts({
+		        chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: null,
+		            plotShadow: false,
+		            type: 'pie',
+		            options3d: {
+		                enabled: true,
+		                alpha: 45
+		            }
+		        },
+		        title: {
+		            text: 'Browser market shares January, 2015 to May, 2015'
+		        },
+		        tooltip: {
+		            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		        },
+		        plotOptions: {
+		            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+		                    style: {
+		                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+		                    }
+		                }
+		            }
+		        },
+		        series: [{
+		            name: 'Brands',
+		            colorByPoint: true,
+		            data: [
+		            {
+		                name: '123',
+		                y: 10
+		            }, {
+		                name: 'Chrome',
+		                y: 10,
+		                sliced: true,
+		                selected: true
+		            }, {
+		                name: 'Firefox (30)',
+		                y: 10
+		            }, {
+		                name: 'Safari',
+		                y: 10,
+		            }, {
+		                name: 'Opera',
+		                y: 10
+		            },  {
+		                name: 'Opera',
+		                y: 10
+		            }, {
+		                name: 'Opera',
+		                y: 10
+		            },{
+		                name: 'Proprietary or Undetectable',
+		                y: 10
+		            }]
+		        }]
+		    });
+		
+
+
+		$(function () {
+		    // Create the chart
+		    $('.divchart2').highcharts({
+		        chart: {
+		            type: 'column'
+		        },
+		        title: {
+		            text: 'Browser market shares. January, 2015 to May, 2015'
+		        },
+		        subtitle: {
+		            text: 'Click the columns to view versions. Source: <a href="http://netmarketshare.com">netmarketshare.com</a>.'
+		        },
+		        xAxis: {
+		            type: 'category'
+		        },
+		        yAxis: {
+		            title: {
+		                text: 'Total percent market share'
+		            }
+
+		        },
+		        legend: {
+		            enabled: false
+		        },
+		        plotOptions: {
+		            series: {
+		                borderWidth: 0,
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '({point.y:.1f}%)'
+		                }
+		            }
+		        },
+
+		        tooltip: {
+		            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+		            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b> 30 choose</b> of total<br/>'
+		        },
+
+		        series: [{
+		            name: 'Brands',
+		            colorByPoint: true,
+		            data: [{
+		                name: 'Microsoft Internet Explorer (20)',
+		                y: 6,
+		          
+		            }, {
+		                name: 'Chrome',
+		                y: 3,
+		             
+		            }, {
+		                name: 'Firefox',
+		                y: 3,
+		              
+		            }, {
+		                name: 'Safari',
+		                y: 6,
+		               
+		            }, {
+		                name: 'Opera',
+		                y: 9 ,
+		             
+		            }, {
+		                name: 'Proprietary or Undetectable',
+		                y: 2,
+		              
+		            }]
+		        }],
+		    });
+		});
+
+		});
+
+		$(function () {
+		    $('.abc').each(function(index, val){
+		    	$(val).highcharts({
+		        data: {
+		            table: 'datatable',
+		            switchRowsAndColumns: true,
+		            endRow: 1,
+		        },
+		        chart: {
+		            type: 'pie'
+		        },
+		        plotOptions: {
+		            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+		                    style: {
+		                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+		                    }
+		                }
+		            }
+		        },
+		        title: {
+		            text: 'Data extracted from a HTML table in the page'
+		        },
+		        yAxis: {
+		            allowDecimals: true,
+		            title: {
+		                text: 'Units'
+		            }
+		        },
+		        tooltip: {
+		            formatter: function () {
+		                return '<b>' + this.series.name + '</b><br/>' +
+		                    this.point.y + ' ' + this.point.name.toLowerCase();
+		            }
+		        }
+		    });
+		    });
+		});
+	</script>
+</html>

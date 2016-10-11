@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Thank you</title>
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" href="../static/css/thanktosurvey.css" th:href="@{/css/thanktosurvey.css}"/>
+</head>
+<body th:object="${form}" th:style="|background: ${form.RGBA}|">
+	<article>
+		<div class="cover" th:if="${#strings.startsWith(form.cover,'C')}" 
+				 th:style="|background: url(/img/cover/survey-cover/${form.cover}); background-size: 100% 100%|">
+				 
+			</div>
+			<div class="cover" th:if="${#strings.startsWith(form.cover,'#')}" 
+				 th:style="|background: ${form.cover}; background-size: 100% 100%|">
+				 
+			</div>
+		<p class="title"> Survey Successful! </p>
+		<div class="content">
+			<p>Thank for your survey.</p>
+			<p>You can <a href="#" th:href="@{/survey(idsurvey=${form.idsurvey})}">click here</a> to continue survey.</p>
+		</div>
+	</article>
+</body>
+</html>
+

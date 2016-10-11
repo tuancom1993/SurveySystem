@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Manage Survey</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/css-btr/bootstrap.min.css" th:href="@{/css/css-btr/bootstrap.min.css}"/>
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" href="../static/css/manage-survey.css" th:href="@{/css/manage-survey.css}"/>
+</head>
+<body>
+	<a href="#" class="toTop"> </a>
+	<a class="add" href="/manage-survey/pre" th:href="@{/manage-survey/pre}"></a>
+	<div class="wrap-all">
+		<!--/*/ <th:block th:include="/menu :: nav-menu"></th:block> /*/-->
+		<article class="w1000" th:object="${form}">
+			
+			<div class="title-and-search flex-box-space-between">
+				<h1 class="title-manage">Manage All Survey</h1>	
+				<input id="search-box" type="text" placeholder="Search..."/>
+			</div>
+
+			<section th:if="${#lists.isEmpty(form.surveys)}">
+				<p> Don't have survey.... </p>
+			</section>
+
+			<section th:if="${not #lists.isEmpty(form.surveys)}" class="all-survey flex-box-center flex-wrap">
+
+				<div th:each="survey : ${form.surveys}"
+					 class="wrap-survey"
+					 th:style="|border-bottom: 3px solid ${survey.maincolor}|">
+					<div class="wrap-e-d">
+					 	<span class="share" th:attr="data-link-survey='localhost:8080/survey?idsurvey='+${survey.idsurvey}, data-link-survey-step='localhost:8080/survey-step?idsurvey='+${survey.idsurvey}"></span>
+						<a href="#" class="delete" th:attr="data-href='/my-survey/delete?idsurvey='+${survey.idsurvey}" data-toggle="modal" data-target="#confirm-delete"></a>
+					 	<a href="#" th:href="@{/manage-survey/edit(idsurvey=${survey.idsurvey})}" class="edit"></a>
+					</div>
+					<a  th:if="${#strings.startsWith(survey.cover,'C')}" class="wrap-cover" target="_blank" href="#" 
+						th:href="@{/survey(idsurvey=${survey.idsurvey})}"
+						th:style="|background:linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url(/img/cover/survey-cover/${survey.cover}); background-size: 100% 100%|"
+						style="background: url(../static/img/cover/cover-common.jpg); background-size: cover"> 
+					</a>
+					<a  th:if="${#strings.startsWith(survey.cover,'#')}" class="wrap-cover" target="_blank" href="#" 
+					 	th:href="@{/survey(idsurvey=${survey.idsurvey})}"
+						th:style="|background:linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3)), ${survey.cover}; background-size: 100% 100%|"
+						style="background: url(../static/img/cover/cover-common.jpg); background-size: cover"> 
+					</a>
+					<div class="wrap-value">
+						<a class="survey-title" href="#" target="_blank" th:href="@{/survey(idsurvey=${survey.idsurvey})}"><h1 th:text="${survey.title}"> Survey 01 </h1></a>
+						<p class="decription"> Decription: <span th:text="${survey.surveydescribe}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam atque facere, facilis officiis omnis ut quos numquam nobis quibusdam cumque beatae. Asperiores, modi, vel? Possimus incidunt illum alias, perferendis impedit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. A rem aliquid laboriosam reprehenderit ratione id libero ipsam dolore deserunt eos, quibusdam dolor, eveniet architecto sit harum. Porro laboriosam impedit dignissimos.</span> </p>
+						<h4> Create Date: <time th:text="${#dates.format(survey.createdate, 'dd-MMM-yyyy')}"> 2016/03/28 </time> </h4>
+						<h3> By: <span th:text="${survey.User.fullname}"> Tuancom </span> </h3> 
+						<a class="viewdata" href="/view-datasurvey/table/" th:href="@{/view-datasurvey/table(id=${survey.idsurvey})}"> View Survey Results </a>
+					</div>
+				</div> <!-- /wrap-template -->
+				
+			</section>
+			<section class="sec-pagin flex-box-center flex-wrap w500">
+				<div class="back pagin"></div>
+				<p> Page 0 </p>
+				<div class="next pagin"></div>
+			</section>
+		</article>
+
+		<!-- Model Share Survey -->
+		<div id="partten"></div>
+		<aside class="model-share">
+			<h1>Share Survey</h1>
+			<div class="line-bottom"><span></span></div>
+			<div class="flex-box-space-between wrap-link-survey">
+				<div class="wrap-input-style">
+					<input class="link-survey" type="text"  required="" />
+					<span> Link Survey </span>
+				</div>
+				
+			</div>
+
+			<div class="wrap-email">
+				<h2> Email </h2>
+				
+				<div class="wrap-input-style ">
+					<input class="emails" type="text"  required="" />
+					<span> To </span>
+				</div>
+
+				<div class="wrap-input-style ">
+					<input class="subject-mail" type="text"  required="" />
+					<span> Subject </span>
+				</div>
+
+				<div class="wrap-input-style ">
+					<input class="content-mail" type="text"  required="" />
+					<span> Content </span>
+				</div>	
+
+				
+			</div>
+			<button class="btn-send-mail btn btn-blue"> Share </button>
+			<img class="loader" src="../static/img/common/loader.gif" th:src="@{/img/common/loader.gif}" alt=""/>
+			<img class="loader" src="../static/img/common/loader.gif" th:src="@{/img/common/loader.gif}" alt=""/>
+			<img class="loader" src="../static/img/common/loader.gif" th:src="@{/img/common/loader.gif}" alt=""/>
+			<span class="message-result"></span>
+		</aside>	
+		<aside>
+			<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		        <div class="modal-dialog">
+		            <div class="modal-content">
+		            
+		                <div class="modal-header">
+		                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+		                </div>
+		            
+		                <div class="modal-body">
+		                    <p>It will delete all things about this Survey.</p>
+		                    <p>Include survey, questions, answers ...</p>
+		                    <p>Do you want to proceed?</p>
+		                    <p class="debug-url"></p>
+		                </div>
+		                
+		                <div class="modal-footer">
+		                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		                    <a class="btn btn-danger btn-ok">Delete</a>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</aside>
+		<div class="plush"></div>	
+	</div> <!-- /end wrap-all -->
+	<footer>
+		
+	</footer>
+</body>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript" src="../static/js/js-btr/bootstrap.min.js" th:src="@{/js/js-btr/bootstrap.min.js}"></script>
+	<script type="text/javascript" src="../static/js/manage-survey.js" th:src="@{/js/manage-survey.js}"></script>
+	<script type="text/javascript" th:inline="javascript">
+		// <![CDATA[
+		$(document).ready(function(){
+			$(".menu .active").removeClass("active");
+			$(".menu .mn-manage .mn-survey a").addClass("active");
+			$(".menu .mn-manage").find('a').first().addClass("active");
+
+			$(".menu-filter .filter").click(function(){
+				var el = $(this);
+
+				$(".menu-filter .filter").removeClass("on");
+				el.addClass("on");
+
+				$(".wrap-template").removeClass("hidden");
+				data = el.attr("data-filter");
+				if(data){
+					$(".wrap-template").not(data).addClass("hidden");
+				}
+			});
+
+			$(".share-link").focus(function(){
+				$(this).select();
+			});
+
+			var adelete =null;
+
+			$(".delete").click(function(){
+				adelete = this;
+			});
+				
+			$('#confirm-delete').on('show.bs.modal', function(e) {
+	            $(this).find('.btn-ok').attr('href', $(adelete).attr('data-href'));
+        	});
+
+			var pageNow = /*[[ ${form.page} ]]*/ '0';
+			var numOfPage = /*[[ ${form.numOfPage} ]]*/ '1';
+			var varSearch = /*[[ ${form.varSearch} ]]*/ '';
+
+			$("#search-box").val(varSearch);
+			$(".sec-pagin p").text("Page "+ (pageNow+1) + "/" + numOfPage);
+			if (pageNow==0) $(".back").addClass("cursor-notallow");
+			if(pageNow==(numOfPage-1)) $(".next").addClass("cursor-notallow");
+
+			$(".back").click(function(){
+				if (pageNow==0) {
+					return false;
+				} else {
+					gotoPage(pageNow-1);
+				}
+			});
+
+			$(".next").click(function(){
+				if(pageNow==(numOfPage-1)){
+					return false;
+				}
+				else gotoPage(pageNow+1);
+			});
+
+		});
+
+		function gotoPage(page){
+			window.location.href = "/manage-survey?page="+page;
+		}
+		
+	// ]]>
+	</script>
+</html>

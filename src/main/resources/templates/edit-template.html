@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Edit Template</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/css-btr/bootstrap.min.css" th:href="@{/css/css-btr/bootstrap.min.css}"/>
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" href="../static/css/edit-template.css" th:href="@{/css/edit-template.css}"/>
+</head>
+<body>
+	<a href="#" class="toTop"> </a>
+	<div class="wrap-all">
+		<!--/*/ <th:block th:include="/menu :: nav-menu"></th:block> /*/-->
+		<div style="height: 50px;"></div>
+		<h1 class="w700 title-edit"> Edit Template </h1>
+		<article class="w600">
+			<form th:action="@{/manage-template/edit(idtemplate=${form.Template.idtemplate})}" th:method="post" th:object="${form}" enctype="multipart/form-data">	
+				<section class="cover">
+					<div class="bg-cover"></div>
+					<img id="img-cover" src="../static/img/cover/cover-common.jpg" th:src="@{/img/cover/}+${form.Template.cover}"/>
+					<a class="come-back" href="#" th:href="@{/manage-template}"> <img th:src="@{/img/common/arr-back.svg}" src="../static/img/common/arr-back.svg" alt=""/> </a>
+					<div class="wrap-choose-cover">
+						<label for="btn-file">Choose Cover</label>
+						<input id="btn-file" type="file" name="cover"/>	
+					</div>
+				</section>
+				<section class="title">
+					<h1>Title</h1>
+					<input type="text" th:field="${form.Template.title}" placeholder="Enter Title Of Template"/>
+				</section>
+				<section class="maincolor">
+					<h1> Main Color </h1>
+					<div class="wrap-color">
+						<input id="main-color" type="color" value="#fd3e00" th:field="${form.Template.maincolor}"/>
+					</div>
+					
+				</section>
+				<section class="tag">
+					<h1> Template Tag </h1>
+					<select th:field="${form.Template.Tag.idtag}">
+						<option th:each="tag : ${form.Tags}"
+								th:value="${tag.idtag}"
+								th:text="${tag.tagname}">123
+						</option>
+					</select>
+				</section>
+
+				<button type="submit" class="btn btn-submit"> Save Template</button>
+				<a id="a-delete" href="#" th:attr="data-href='/manage-template/delete?idtemplate='+${form.Template.idtemplate}" data-toggle="modal" data-target="#confirm-delete"><button type="button" class="btn btn-red btn-del"> Delete Template </button></a>
+			</form>
+
+			<aside>
+				<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			        <div class="modal-dialog">
+			            <div class="modal-content">
+			            
+			                <div class="modal-header">
+			                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+			                </div>
+			            
+			                <div class="modal-body">
+			                    <p>You are about to delete this Template.</p>
+			                    <p>Do you want to proceed?</p>
+			                    <p class="debug-url"></p>
+			                </div>
+			                
+			                <div class="modal-footer">
+			                    <button style="margin-top: 0;" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			                    <a class="btn btn-danger btn-ok">Delete</a>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</aside>
+		</article>
+		<div style="height: 100px;"></div>
+		<div class="plush"></div>	
+	</div> <!-- /end wrap-all -->
+	<footer>
+		
+	</footer>
+</body>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript" src="../static/js/js-btr/bootstrap.min.js" th:src="@{/js/js-btr/bootstrap.min.js}"></script>
+	<script type="text/javascript">
+	// <![CDATA[
+	$(document).ready(function() {
+	    $('#btn-file').change(function(evt) {
+	    	readURL(this);
+	    });
+
+	    $("input").focus(function(){
+	    	$(this).parent().find(".mess-err").text("");
+	    });
+	    
+		$(".menu .active").removeClass("active");
+		$(".menu .mn-template a").addClass("active");
+		$(".menu .mn-manage").find('a').first().addClass("active");
+
+		$('#confirm-delete').on('show.bs.modal', function(e) {
+	        $(this).find('.btn-ok').attr('href', $("#a-delete").attr('data-href'));
+        });
+	});
+
+	function readURL(input) {
+	    if ( input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	            $('#img-cover').attr('src', e.target.result);
+	       }
+	    reader.readAsDataURL(input.files[0]);
+    	}
+	}
+	// ]]>
+	</script>
+</html>

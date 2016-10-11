@@ -1,0 +1,78 @@
+h1.title-page{
+	font-size: 36px;
+	font-weight: 100;
+	margin-top: 50px;
+}
+
+article{
+	margin-top: 50px;
+	padding-bottom: 200px;
+}
+
+a{
+	
+}
+
+.manage{
+	display: block;
+	width: 200px;
+	height: 200px;
+	position: relative;
+	margin: 0 15px 30px 15px;
+}
+
+.manage:before{
+	content: "";
+	position: absolute;
+	width: 0;
+	height: 0;
+	bottom: 0;
+	right: 0;
+	border-width: 0px;
+	border-style: solid;
+	border-color: #fff;
+	border-left-color:transparent;
+    border-top-color:transparent;
+    border-right-color: white;
+    border-bottom-color: white;
+    box-shadow:-3px -3px 3px rgba(0,0,0,0.1);
+    -webkit-transition: border-width 0.3s;
+    -o-transition: border-width 0.3s;
+    transition: border-width 0.3s;
+}
+
+.manage:hover:before{
+	border-width: 20px;
+}
+
+.manage-survey{
+	background: rgb(131,162,216) url(../img/common/survey.svg) center center no-repeat;
+	background-size: 70px 70px;
+}
+
+.manage-template{
+	background: rgb(249,101,67) url(../img/common/template2.svg) center center no-repeat;
+	background-size: 70px 70px;
+}
+
+.manage-user{
+	background: rgb(69,171,190) url(../img/common/people.svg) center center no-repeat;
+	background-size: 70px 70px;
+}
+
+.manage-fb-block{
+	background: #4CAF50 url(../img/common/feedback.svg) center center no-repeat;
+	background-size: 65px 65px;
+}
+
+.statistical{
+	background: #FFC17F url(../img/common/timeline-w.svg) center center no-repeat;
+	background-size: 65px 65px;
+}
+
+.manage span{
+	display: block;
+	text-align: center;
+	color: white;
+	margin-top: 140px;
+}

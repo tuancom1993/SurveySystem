@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Home</title>
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" href="../static/css/home.css" th:href="@{/css/home.css}"/>
+</head>
+<body>
+	<a href="#" class="toTop"> </a>
+	<div class="wrap-all">
+		<!--/*/ <th:block th:include="/menu :: nav-menu"></th:block> /*/-->
+		<header>
+			<div class="background"></div>
+			<h1> GET <p> SURVEY </p> </h1>
+			<p> Start create survey faster and easier </p>
+			<div class="btnGet"> <a href="/manage-survey/pre">Create</a>  </div>
+		</header>
+	</div>
+</body>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".menu .active").removeClass("active");
+			$(".menu .mn-home a").addClass("active");
+		});
+
+		$(window).scroll(function(){
+			var val = ($(window).scrollTop()/40);
+			if (val>6) return false;
+			$(".background").css({"-webkit-filter":"blur("+val+"px)", "filter" : "blur("+val+"px)"});
+		});
+	</script>
+</html>

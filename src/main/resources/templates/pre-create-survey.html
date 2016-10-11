@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Choose Template To Create Survey</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../static/css/css-btr/bootstrap.min.css" th:href="@{/css/css-btr/bootstrap.min.css}"/> -->
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" href="../static/css/pre-create-survey.css" th:href="@{/css/pre-create-survey.css}"/>
+</head>
+<body>
+	<a href="#" class="toTop"> </a>
+	<a class="add" href="/manage-template/create" th:href="@{/manage-survey/create?idtemplate=0}"></a>
+	<div class="wrap-all">
+		<!--/*/ <th:block th:include="/menu :: nav-menu"></th:block> /*/-->
+		<article class="w900" th:object="${form}">
+			<h1 class="title-manage">Choose Template</h1>
+			<ul class="menu-filter"> Filter tag: 
+				<li> <a class="filter on"> All </a> </li>
+				<li th:each="tag : ${form.Tags}"><a th:id="${tag.idtag}" th:class="filter"  th:attr="data-filter='.filter-tag-'+${tag.idtag}" th:text="${tag.tagname}"> All </a></li>
+			</ul>
+			<section class="section-customize-template">
+				<div class="wrap-customize-template" >
+					<a href="#" th:href="@{/manage-survey/create?idtemplate=0}"> <img src="../static/img/cover/customize-cover.jpg" th:src="@{/img/cover/customize-cover.jpg}"/> </a>
+					<div class="wrap-value">
+						<a href="#" th:href="@{/manage-survey/create?idtemplate=0}"><h1> Customize Survey </h1></a>
+						<p> This is Customize Template. Choose this to create Customize Survey. </p>
+						<p> <a th:id="0" href="#" > Customize </a></p>	
+					</div>
+				</div> <!-- /wrap-template -->
+			</section>
+			
+			<section class="all-template flex-box-center flex-wrap">
+
+				<div th:classappend="'filter-tag-'+${template.Tag.idtag}"
+					 class="wrap-template"  
+					 th:each="template : ${form.Templates}"
+					 th:style="|border-bottom: 3px solid ${template.maincolor} |">
+					<a href="#" th:href="@{/manage-survey/create(idtemplate=${template.idtemplate})}"> 
+						<img src="../static/img/cover/cover-common.jpg" th:src="@{/img/cover/}+${template.cover}"/> 
+					</a>
+					<div class="wrap-value">
+						<a href="#" th:href="@{/manage-survey/create(idtemplate=${template.idtemplate})}"><h1 th:text="${template.title}"> First Template </h1></a>
+						<h4> Create Date: <time th:text="${#dates.format(template.createdate, 'dd-MMM-yyyy')}"> 2016/03/28 </time> </h4> 
+						<p> <a th:id="${template.Tag.idtag}" th:class="filter" th:attr="data-filter='.filter-tag-'+${template.Tag.idtag}" href="#" th:text="${template.Tag.tagname}"> Movie </a></p>	
+					</div>
+				</div> <!-- /wrap-template -->
+				
+			</section>
+		</article>
+		<div class="plush"></div>	
+	</div> <!-- /end wrap-all -->
+	<footer>
+		
+	</footer>
+</body>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript">
+	// <![CDATA[
+		$(document).ready(function(){
+			$(".menu .active").removeClass("active");
+			$(".menu .mn-create-sv a").addClass("active");
+
+			$(".menu-filter .filter").click(function(){
+				var el = $(this);
+
+				$(".menu-filter .filter").removeClass("on");
+				el.addClass("on");
+
+				$(".wrap-template").removeClass("hidden");
+				data = el.attr("data-filter");
+				if(data){
+					$(".wrap-template").not(data).addClass("hidden");
+				}
+			});
+		});
+
+
+
+	// ]]>
+	</script>
+</html>

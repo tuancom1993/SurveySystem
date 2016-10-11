@@ -1,0 +1,137 @@
+.wrap-all{
+	background-color: rgba(0,0,0,0.2);
+}
+
+article{
+	border: 1px solid rgb(217,217,217);
+	padding-bottom: 20px;
+	background-color: white;
+}
+
+.cover{
+	width: 100%;
+	height: 200px;
+	position: relative;
+	padding: 0;
+}
+
+.bg-cover{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: -webkit-linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2));
+	background: -o-linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2));
+	background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2));
+}
+
+.cover img{
+	width: 100%;
+	height: 100%;
+}
+
+.wrap-choose-cover{
+	position: absolute;
+	left: 10px;
+	bottom: 5px;
+	width: 200px;
+	height: 30px;
+	z-index: 1;
+}
+
+.wrap-choose-cover label{
+	color: white;
+	cursor: pointer;
+	font-size: 16px;
+	padding: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+
+}
+
+.wrap-choose-cover label:hover{
+	box-shadow: 0 0 10px white;
+}
+
+
+.wrap-choose-cover input[type="file"]{
+	display: none;
+}
+
+section{
+	padding-top: 30px;
+	padding-left: 20px;
+}
+
+section h1{
+	color: red;
+	font-size: 12px;
+	font-weight: 100;
+	margin-bottom: 10px;
+}
+
+.title input{
+	width: 80%;
+	height: 30px;
+	font-size: 24px;
+	border: none;
+	border-bottom: 2px solid rgba(0,0,0,0.3);
+}
+
+.title input:focus{
+	border-bottom: 2px solid rgb(245,0,87);
+}
+
+.wrap-color{
+
+}
+
+.wrap-color input[type="color"]{
+	display: block;
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	border: none;
+	outline: none;
+}
+
+.wrap-color input[type="color"]::-webkit-color-swatch-wrapper{
+	padding: 0;
+	border: none;
+}
+
+.wrap-color input[type="color"]::-webkit-color-swatch{
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	border: none;
+}
+
+.wrap-color input[type="color"]::-moz-color-swatch-wrapper{
+	padding: 0;
+	border: none;
+}
+
+.wrap-color input[type="color"]::-moz-color-swatch{
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	border: none;
+}
+
+section.tag select{
+	width: 80%;
+	height: 30px;
+	font-size: 14px;
+	padding-left: 5px;
+	background-color: transparent;
+	border-radius: 5px;
+}
+
+button{
+	display: block;
+	margin-left: 20px;
+	margin-top: 40px;
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Survey Step</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../static/css/css-btr/bootstrap.min.css" th:href="@{/css/css-btr/bootstrap.min.css}"/> -->
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" href="../static/css/survey-step.css" th:href="@{/css/survey-step.css}"/>
+
+	<style th:inline="text">
+		input[type="text"].in-ans:focus{
+			border-bottom: 1.5px solid [[${form.survey.maincolor}]];
+		}
+		section .move{
+			background-color: [[${form.survey.maincolor}]];
+		}
+
+		.wrap-input-rc-style input[type="radio"]:checked ~ label, .wrap-input-rc-style input[type="checkbox"]:checked ~ label{
+			border-color: [[${form.survey.maincolor}]];
+			background-color: [[${form.survey.maincolor}]];
+		}
+	</style>
+</head>
+<body th:object="${form}" th:style="|background: ${form.colorRGBA} 100% 100%;|">
+	<a href="#" class="toTop"> </a>
+	<span class="currentQuestion"></span>
+	<article>
+		<section id="sec-head" class="current">
+			<div class="move down"></div>
+			<div class="cover" th:if="${#strings.startsWith(form.survey.cover,'C')}" 
+				 th:style="|background: url(/img/cover/survey-cover/${form.survey.cover}); background-size: 100% 100%|">
+			</div>
+			<div class="cover" th:if="${#strings.startsWith(form.survey.cover,'#')}" 
+				 th:style="|background: ${form.survey.cover}; background-size: 100% 100%|">
+				 
+			</div>
+			<div class="wrap-infor">
+				<h1 class="survey-title" th:text="${form.survey.title}">Survey title</h1>
+				<p class="description" th:utext="${form.survey.surveydescribe}">  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet rerum adipisci magnam porro. Sapiente odit eos deserunt voluptates, illum dicta facilis, excepturi blanditiis, quidem repudiandae provident laborum eveniet architecto commodi. </p>
+				<!-- <p class="description" th:utext="${#strings.replace( #strings.escapeXml( form.survey.surveydescribe ),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam ipsum, quo non amet officiis consequuntur atque quasi totam illum! Impedit molestiae optio nisi obcaecati quis soluta inventore amet explicabo, quasi!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam ipsum, quo non amet officiis consequuntur atque quasi totam illum! Impedit molestiae optio nisi obcaecati quis soluta inventore a </p> -->
+				<p class="infom-manadatory"> (*) is mandatory (required) </p>
+				
+			</div>
+		</section>
+
+
+		<section id="sec-2" class="section-question flex-box flex-box-center flex-wrap"
+				 th:each ="question : ${form.survey.questions}"
+				 th:switch="${question.Kindquestion.idkindquestion}">
+			<div class="move up"></div>
+			<div class="move down"></div>
+
+			<div class="wrap-if" th:case="1" th:attr="data-kindinput='textbox'" th:classappend="${question.mandatory} ? mandatory : no ">
+				<h1 class="question" th:text="${question.contentquestion}"> Question 01</h1>
+				<p class="mess-err"></p>
+				<div class="wrap-answers">
+					<div class="wrap-answer" th:each="answer : ${question.answers}">
+						<input class="in-ans" type="text" placeholder="Enter your answer"
+						       th:id="${answer.idanswer}"
+						       th:attr="data-kindanswer=val,
+						       data-idq=${question.idquestion},
+						       data-ida=${answer.idanswer},
+						       data-kindinput='textbox'"/> 
+						<!-- <div class="wrap-input-style">
+							<input type="text" required="" 
+							   class="in-ans"
+						       th:id="${answer.idanswer}"
+						       th:attr="data-kindanswer=val,
+						       data-idq=${question.idquestion},
+						       data-ida=${answer.idanswer},
+						       data-kindinput='textbox'"/>
+							<span> Answer </span>
+						</div> -->
+					</div>	<!-- /wrap-answer -->
+				</div> <!-- /wrap-answers -->
+			</div> <!-- /wrap-if -->
+
+			<div class="wrap-if" th:case="2" th:attr="data-kindinput='textarea'" th:classappend="${question.mandatory} ? mandatory : no ">
+				<h1 class="question" th:text="${question.contentquestion}"> Question 01</h1>
+				<p class="mess-err"></p>
+				<div class="wrap-answers" >
+					<div class="wrap-answer" th:each="answer : ${question.answers}">
+						<textarea class="in-ans" type="text" placeholder="Enter your answer"
+						       th:id="${answer.idanswer}"
+						       th:attr="data-kindanswer=val,
+						       data-idq=${question.idquestion},
+						       data-ida=${answer.idanswer},
+						       data-kindinput='textarea'"></textarea>
+					</div>	<!-- /wrap-answer -->
+				</div> <!-- /wrap-answers -->
+			</div> <!-- /wrap-if -->
+
+			<div class="wrap-if" th:case="4" th:attr="data-kindinput='radio'" th:classappend="${question.mandatory} ? mandatory : no ">
+				<h1 class="question" th:text="${question.contentquestion}"> Question 01</h1>
+				<p class="mess-err"></p>
+				<div class="wrap-answers" >
+					<div class="wrap-answer" th:each="answer : ${question.answers}">
+						<div class="wrap-input-rc-style">
+							<input class="in-ans" type="radio" th:name="|radio-${question.idquestion}|"
+							       th:id="${answer.idanswer}"
+							       th:attr="data-kindanswer=id,
+							       data-idq=${question.idquestion},
+							       data-ida=${answer.idanswer},
+							       data-kindinput='radio'"/>
+							<label th:for="${answer.idanswer}"></label>
+						</div>
+						<!-- <input class="in-ans" type="radio" th:name="|radio-${question.idquestion}|" placeholder="Enter your answer"
+						       th:id="${answer.idanswer}"
+						       th:attr="data-kindanswer=id,
+						       data-idq=${question.idquestion},
+						       data-ida=${answer.idanswer},
+						       data-kindinput='radio'"/> -->
+						<label th:for="${answer.idanswer}" th:text="${answer.content}"></label>
+					</div>	<!-- /wrap-answer -->
+				</div> <!-- /wrap-answers -->
+			</div> <!-- /wrap-if -->
+
+			<div class="wrap-if" th:case="3" th:attr="data-kindinput='checkbox'"  th:classappend="${question.mandatory} ? mandatory : no ">
+				<h1 class="question" th:text="${question.contentquestion}"> Question 01</h1>
+				<p class="mess-err"></p>
+				<div class="wrap-answers" >
+					<div class="wrap-answer" th:each="answer : ${question.answers}">
+						<div class="wrap-input-rc-style">
+							<input class="in-ans" type="checkbox" th:name="|checkbox-${question.idquestion}|"
+						       th:id="${answer.idanswer}"
+						       th:attr="data-kindanswer=id,
+						       data-idq=${question.idquestion},
+						       data-ida=${answer.idanswer},
+						       data-kindinput='checkbox'"/>
+							<label th:for="${answer.idanswer}"></label>
+						</div>
+						<!-- <input class="in-ans" type="checkbox" th:name="|checkbox-${question.idquestion}|" placeholder="Enter your answer"
+						       th:id="${answer.idanswer}"
+						       th:attr="data-kindanswer=id,
+						       data-idq=${question.idquestion},
+						       data-ida=${answer.idanswer},
+						       data-kindinput='checkbox'"/> -->
+						<label th:for="${answer.idanswer}" th:text="${answer.content}"></label>
+					</div>	<!-- /wrap-answer -->
+				</div> <!-- /wrap-answers -->
+			</div> <!-- /wrap-if -->
+
+		</section>
+		
+		<section id="sec-done" class="section-question flex-box flex-box-center flex-wrap">
+			<div class="move up"></div>
+			<button id="btn-submit" type="button" > Done? </button>
+			
+			<span class="btn-showFeedback"></span>
+		</section>
+
+		<div id="partten"></div>
+		<aside class="feedbackblock-form">
+			<h1>Feedback</h1>
+			<p>Please give your feedback if you have anything request about the system.</p>
+			<textarea id="area-feedback" placeholder="Your feedback"></textarea>
+			<div class="flex-box">
+				<div class="wrap-input-style">
+					<input id="name" type="text"  required="" />
+					<span> Your Name </span>
+				</div>
+				<div class="wrap-input-style">
+					<input id="contact" type="text" required="" />
+					<span> Email or Phone</span>
+				</div>
+			</div>
+			<button class="btn btn-submit btn-giveFeedback" type="button"> Give Feedback </button>
+			<span class="message-result">  </span>
+		</aside>
+	</article>
+	<input type="hidden" id="idsurvey" th:field="${form.survey.idsurvey}"/>
+</body>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript" src="../static/js/survey-step.js" th:src="@{/js/survey-step.js}"></script>
+	<script type="text/javascript">
+	
+	</script>
+</html>

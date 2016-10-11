@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Data Survey - Chart</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../static/css/css-btr/bootstrap.min.css" th:href="@{/css/css-btr/bootstrap.min.css}"/> -->
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" href="../static/css/view-data-survey-chart.css" th:href="@{/css/view-data-survey-chart.css}"/>
+</head>
+<body th:object="${surveyChart}" th:style="|background: ${surveyChart.RGBA} 100% 100%;|">
+	<a href="#" class="toTop"> </a>
+	<div class="wrap-all">
+		<!--/*/ <th:block th:include="/menu :: nav-menu"></th:block> /*/-->
+		<div class="wrap-title-page flex-box-space-between">
+			<h1 class="title-page"> Survey Results - Summary </h1>	
+			
+			<div>
+				<span> View Data In:  </span>
+				<select onchange="location = this.value;">
+					<option selected="" value="#"> Summary </option>
+					<option th:value="|/view-datasurvey/table?id=${surveyChart.idsurvey}|"> Table - Grid </option>
+				</select>
+			</div>
+		</div>
+		<article class="w800">
+			<section class="section-cover">
+				<div class="cover" th:if="${#strings.startsWith(surveyChart.cover,'C')}" 
+				 th:style="|background: url(/img/cover/survey-cover/${surveyChart.cover}); background-size: 100% 100%|">
+				</div>
+
+				<div class="cover" th:if="${#strings.startsWith(surveyChart.cover,'#')}" 
+					 th:style="|background: ${surveyChart.cover}; background-size: 100% 100%|">
+				</div>
+			</section>
+			<section class="section-survey">
+				<h1 class="title-survey" th:text="${surveyChart.title}"> This is title survey </h1>
+				<p class="description" th:text="${surveyChart.surveydescribe}"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias sit, consequuntur saepe veniam quae. Dignissimos nemo neque pariatur facere quam, corporis, suscipit exercitationem laboriosam ut quos saepe ullam, molestias odio?</p>
+
+				<div class="wrap-question"
+					 th:each ="questionChart : ${surveyChart.questionCharts}"
+					 th:switch="${questionChart.idkindquestion}">
+					<h3 class="question-title" th:text="${questionChart.contentquestion}"> Qustion title</h3>
+					
+					<div class="wrap-result"
+					     th:case="1">
+						<table class="table-result text">
+							<tr th:each="answerChart : ${questionChart.answerCharts}">
+								<td th:text="${answerChart.content}"> 121</td>
+							</tr>
+						</table>
+					</div>
+
+					<div class="wrap-result"
+					     th:case="2">
+						<table class="table-result text">
+							<tr th:each="answerChart : ${questionChart.answerCharts}">
+								<td th:text="${answerChart.content}"> 121</td>
+							</tr>
+						</table>
+					</div>
+
+					<div class="wrap-result chart"
+					     th:case="3">
+						<table class="table-result choose checkbox" th:attr="id=|table-${questionChart.idquestion}|">
+							<thead>
+								<tr>
+									<th></th>
+									<th th:each="answerChart : ${questionChart.answerCharts}" th:text="|${answerChart.content}|"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th>Answers</th>
+									<td th:each="answerChart : ${questionChart.answerCharts}" th:text="${answerChart.number}"></td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+
+					<div class="wrap-result chart"
+					     th:case="4">
+						<table class="table-result choose radio" th:attr="id=|table-${questionChart.idquestion}|">
+							<thead>
+								<tr>
+									<th></th>
+									<th th:each="answerChart : ${questionChart.answerCharts}" th:text="|(${answerChart.content})|"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th>Number</th>
+									<td th:each="answerChart : ${questionChart.answerCharts}" th:text="${answerChart.number}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			<!-- <button class="export btn btn-blue" type="button"> Click to Export </button> -->
+			</section>
+		</article>
+		<div class="plush"></div>	
+	</div> <!-- /end wrap-all -->
+	<footer>
+		
+	</footer>
+
+
+</body>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript" src="../static/js/js-chart/highcharts.js" th:src="@{/js/js-chart/highcharts.js}"></script>
+	<script type="text/javascript" src="../static/js/js-chart/highcharts-3d.js" th:src="@{/js/js-chart/highcharts-3d.js}"></script>
+	<script type="text/javascript" src="../static/js/js-chart/modules/data.js" th:src="@{/js/js-chart/modules/data.js}"></script>
+	<script type="text/javascript" src="../static/js/js-chart/modules/exporting.js" th:src="@{/js/js-chart/modules/exporting.js}"></script>
+	<script type="text/javascript" src="../static/js/view-data-survey-chart.js" th:src="@{/js/view-data-survey-chart.js}"></script>
+	
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+		});
+	</script>
+</html>

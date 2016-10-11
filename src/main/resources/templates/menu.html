@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Header</title>
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+</head>
+<body>
+	<div th:fragment="nav-menu">
+		<nav th:if="${session.userLogin} != null" th:switch="${session.userLogin.Role.idrole}">
+			<div class="over-nav" ></div>
+			<ul class="menu" th:case="1">
+				<li class="mn-home"><a href="#" th:href="@{/homepage}">HOME</a></li>
+				<li class="mn-create-sv"><a href="#" th:href="@{/manage-survey/pre}">CREATE SURVEY</a></li>
+				<li class="mn-profile"><a href="#" th:href="@{/profile/view}">PROFILE</a></li>
+				<li class="mn-manage"><a href="#" th:href="@{/manage}">MANAGE</a>
+					<ul class="ul-lv1">
+						<li class="mn-survey"><a href="#" th:href="@{/manage-survey?page=0}">SURVEY</a></li>
+						<li class="mn-template"><a href="#" th:href="@{/manage-template}">TEMPLATE</a></li>
+						<li class="mn-user"><a href="#" th:href="@{/manage-user}">USER</a></li>
+						<li class="mn-feedbackblock"><a href="#" th:href="@{/manage-feedback}">FEEDBACK</a></li>
+						<li class="mn-statistical"><a href="#" th:href="@{/statistical}">STATISTIC</a></li>
+						
+					</ul>
+				</li>
+				<li class="mn-mysurvey"><a href="#" th:href="@{/my-survey?page=0}">MY SURVEY</a></li>
+				<li class="mn-logout"><a href="#" th:href="@{/logout}">LOG OUT</a></li>
+			</ul>
+
+			<ul class="menu" th:case="2">
+				<li class="mn-home"><a href="#" th:href="@{/homepage}">HOME</a></li>
+				<li class="mn-create-sv"><a href="#" th:href="@{/manage-survey/pre}">CREATE SURVEY</a></li>
+				<li class="mn-profile"><a href="#" th:href="@{/profile/view}">PROFILE</a></li>
+				<li class="mn-mysurvey"><a href="#" th:href="@{/my-survey?page=0}">MY SURVEY</a></li>
+				<li class="mn-logout"><a href="#" th:href="@{/logout}">LOG OUT</a></li>
+			</ul>
+		</nav>
+	</div>
+</body>
+</html>

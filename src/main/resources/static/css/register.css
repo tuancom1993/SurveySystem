@@ -1,0 +1,113 @@
+html{
+	height: auto;
+}
+body{
+	 height: auto;
+	/* background-image: -webkit-linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+	background-image: -o-linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+	background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+	background-size: 100% 100%;
+	background-repeat: no-repeat; */
+	/* background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0.5) 100%), url("../img/common/mountain-06.jpg") no-repeat; */
+	background: linear-gradient(135deg, rgba(236,22,87,0.2) 0%, #ffa534 100%), url("../img/common/mountain-06.jpg") no-repeat;
+	background-size: cover;
+	padding: 100px 0; 
+
+}
+
+article{
+	 /* align-items: center; */
+	/* background: white;
+	border-radius: 15px;
+	box-shadow: 5px 5px 15px black; */
+	flex-wrap: wrap;
+}
+
+
+.title{
+	width: 100%;
+	font-size: 36px;
+	font-weight: 100;
+	text-align: center;
+	padding: 20px;
+}
+
+section{
+	/*  border: 1px solid black;
+		background: rgba(255,255,255,1);  */
+}
+
+.sec-ava{
+	width: 300px;
+	height: 300px;
+	text-align: center;
+	padding: 20px 20px;
+}
+
+.sec-ava img{
+	width: 150px;
+	height: 150px;
+	border-radius: 100%;
+	margin: auto;
+	display: block;
+	box-shadow: 0 0 15px rgba(0,0,0,0.7);
+	margin-bottom: 50px;
+}
+
+.sec-ava input{
+	display: none;
+}
+
+.sec-ava label{
+	
+}
+
+
+.sec-infor{
+	width: 300px;
+	padding: 0 0 30px 0;
+}
+
+.sec-infor .wrap-input-style{
+	width: 250px;
+	margin: 15px auto;
+}
+
+.sec-infor .wrap-input-style input{
+	width: 100%;
+	font-size: 14px;
+}
+
+.wrap-input{
+	width: 250px;
+	margin: 15px auto;
+}
+
+.wrap-input span{
+	margin-right: 30px;
+	font-size: 12px;
+	color: green;
+}
+
+.wrap-input input{
+	vertical-align: -2px;
+}
+
+.wrap-input label{
+	margin-right: 30px;
+	font-size: 14px;
+}
+
+button[type='submit']{
+	display: block;
+	width: 150px;
+	margin: 40px auto 0 auto;
+}
+
+.mess-err{
+	height: 15px;
+}
+
+.sec-infor .wrap-input-style.m0a{
+	margin: 0 auto;
+}

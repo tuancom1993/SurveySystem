@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Data Survey Grid (Table)</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../static/css/css-btr/bootstrap.min.css" th:href="@{/css/css-btr/bootstrap.min.css}"/> -->
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<link rel="stylesheet" type="text/css" href="../static/bootstrap-3.3.6/css/bootstrap.css" th:href="@{/bootstrap-3.3.6/css/bootstrap.css}"/>
+	<link rel="stylesheet" type="text/css" href="../static/css/css-btr/dataTables.bootstrap.css" th:href="@{/css/css-btr/dataTables.bootstrap.css}"/>
+	<link rel="stylesheet" href="../static/css/view-data-survey-table.css" th:href="@{/css/view-data-survey-table.css}"/>
+</head>
+<body th:object="${form}">
+	<a href="#" class="toTop"> </a>
+	<div class="wrap-all">
+		<!--/*/ <th:block th:include="/menu :: nav-menu"></th:block> /*/-->
+		<div class="wrap-title-page flex-box-space-between">
+			<h1 class="title-page"> Survey Results - Table </h1>	
+			
+			<div>
+				<span> View Data In:  </span>
+				<select onchange="location = this.value;">
+					<option selected="" value="#"> Table - Grid </option>
+					<option th:value="|/view-datasurvey/chart?id=${form.survey.idsurvey}|"> Summary </option>
+				</select>
+			</div>
+		</div>
+		<article>
+			<div class="infor">
+				<p class="survey-title">Survey Title: <span th:text="${form.survey.title}"> Survey 01</span></p>
+				<p class="create-date"> Create date: <span th:text="${#dates.format(form.survey.createdate, 'dd-MMM-yyyy')}"> 2016-05-15</span> </p>
+			</div>
+
+			<div id="mess-empty" th:if="${#lists.isEmpty(form.answerUserForms)}"> Opps! <br/> Sorry, your survey don't have survey's data. </div>
+			<div id="wrap-table">
+				<table id="table-survey" th:if="${not #lists.isEmpty(form.answerUserForms)}">
+					<thead>
+			            <tr>
+			                <th>Index</th>
+			                <th>Survey Date</th>
+			                <th th:each="question : ${form.survey.questions}" class="question-title"> 
+								<!-- <span th:text="${question.contentquestion}"> Question </span>
+								<img th:if="${question.kindquestion.idkindquestion == 3 or question.kindquestion.idkindquestion == 4 } "
+								     src="../static/img/common/timeline-w.svg" 
+								     th:src="@{/img/common/timeline-w.svg}" 
+									 th:attr="data-id=${question.idquestion}"
+								     alt="Click to get Chart"
+								     class="img-chart"/> -->
+								<span th:if="${question.kindquestion.idkindquestion == 1 or question.kindquestion.idkindquestion == 2}" th:text="${question.contentquestion}"> Question </span>
+								<span th:if="${question.kindquestion.idkindquestion == 3 or question.kindquestion.idkindquestion == 4 } "
+									 th:text="${question.contentquestion}"
+									 th:attr="data-id=${question.idquestion}"
+								     class="link-show-chart"></span>
+			                </th>
+			            </tr>
+				    </thead>
+				    <tbody>
+				    	<tr th:each="answerUserForm , i : ${form.answerUserForms}">
+				    		<td th:text="${i.index+1}">1</td>
+				    		<td th:each="content : ${answerUserForm.contents}"  th:text="${content}"></td> 
+				    	</tr>
+				    </tbody>
+				</table>
+			</div>
+		</article>
+		<div class="partten"></div>
+		<aside class="model-chart">
+			
+		</aside>
+		<div class="plush"></div>	
+	</div> <!-- /end wrap-all -->
+	<footer>
+		
+	</footer>
+</body>
+	<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+
+	<script type="text/javascript" src="../static/js/js-chart/highcharts.js" th:src="@{/js/js-chart/highcharts.js}"></script>
+	<script type="text/javascript" src="../static/js/js-chart/highcharts-3d.js" th:src="@{/js/js-chart/highcharts-3d.js}"></script>
+	<script type="text/javascript" src="../static/js/js-chart/modules/data.js" th:src="@{/js/js-chart/modules/data.js}"></script>
+	<script type="text/javascript" src="../static/js/js-chart/modules/exporting.js" th:src="@{/js/js-chart/modules/exporting.js}"></script>
+	<script type="text/javascript" src="../static/js/view-data-survey-table.js" th:src="@{/js/view-data-survey-table.js}"></script>
+		<script type="text/javascript" src="../static/js/js-btr/jquery.dataTables.js" th:src="@{/js/js-btr/jquery.dataTables.js}"></script>
+	<script type="text/javascript" src="../static/js/js-btr/dataTables.bootstrap.js" th:src="@{/js/js-btr/dataTables.bootstrap.js}"></script>
+	<script type="text/javascript">
+	// <![CDATA[
+		/*$('#table-survey').DataTable();*/
+	// ]]>
+	</script>
+</html>

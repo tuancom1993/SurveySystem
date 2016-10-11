@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>REGISTER</title>
+	<link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+	<!-- <link rel="stylesheet" href="../static/jquery-ui/jquery-ui.css" th:href="@{/jquery-ui/jquery-ui.css}"/> -->
+	<link rel="stylesheet" href="../static/datetimepicker/jquery.datetimepicker.css" th:href="@{/datetimepicker/jquery.datetimepicker.css}"/>
+	<link rel="stylesheet" href="../static/css/register.css" th:href="@{/css/register.css}"/>
+</head>
+<body>
+		<!--/*/ <th:block  th:include="/menu :: nav-menu"></th:block> /*/-->
+	<form  th:method="post" enctype="multipart/form-data" th:action="@{/register}" th:object="${user}">	
+		<article class="w700 flex-box-space-around">
+			<h1 class="title"> REGISTER </h1>
+			<section class="sec-ava">
+				<img class="avata" src="../static/img/avata/User.png" th:src="@{/img/avata/User.png}"/>
+				<input id="btn-file" class="btn btn-black-2" type="file" name="avataFile" value="Get Image"/>
+				<label for="btn-file" class="btn btn-blue"> Get Avatar </label>
+			</section>
+			<section class="sec-infor">
+				<div class="wrap-input-style">
+					<input type="text" th:field="${user.fullname}" required="" />
+					<span> Full Name </span>
+					<div class="mess-err" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></div>
+				</div>
+				<div class="wrap-input-style">
+					<input type="text" th:field="${user.username}" required="" />
+					<span> UserName </span>
+					<div class="mess-err" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+				</div>
+				<div class="wrap-input-style m0a">
+					<input id="pass" type="password" th:field="${user.password}" required="" />
+					<span> Password </span>
+					<div class="mess-err"></div>
+					<div class="mess-err" th:errors="*{password}"></div>
+				</div>
+				<div class="wrap-input-style m0a">
+					<input id="re-pass" type="password" required="" />
+					<span> Re-Password </span>
+					<div class="mess-err"></div>
+				</div>
+				<div class="wrap-input-style m0a">
+					<input type="text" th:field="${user.email}" required="" />
+					<span> Email </span>
+					<div class="mess-err" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+				</div>
+				<div class="wrap-input-style">
+					<input id="date-picker" type="text" th:field="${user.birthday}" required="" />
+					<span> Birthday (yyyy/mm/dd) </span>
+					<div class="mess-err" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></div>
+				</div>
+				<div class="wrap-input-style">
+					<input type="text" th:field="${user.phone}" required="" />
+					<span> Phone </span>
+					<div class="mess-err" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+				</div>
+				<div class="wrap-input">
+					<span>Sex:</span>
+					<input id="male" type="radio" name="sex" value="1" checked="" th:checked="checked" th:field="${user.sex}"/> <label for="male"> Male </label>
+					<input id="female" type="radio" name="sex" value="0" th:field="${user.sex}"/> <label for="female"> Female </label>
+				</div>
+				<div class="wrap-input" th:if="${session.userLogin!=null and session.userLogin.Role.idrole==1}">
+					<span>Role:</span>
+					<input id="admin" type="radio" name="role" value="1" checked="" th:checked="checked" th:field="${user.role.idrole}"/> <label for="admin"> Admin </label>
+					<input id="user" type="radio" name="role" value="2" th:field="${user.role.idrole}"/> <label for="user"> User </label>
+				</div>
+				<button id="submit" type="submit" class="btn btn-submit"> Register </button>
+			</section>
+		</article>
+	</form>
+</body>
+<script type="text/javascript" src="../static/js/jquery-2.2.1.min.js" th:src="@{/js/jquery-2.2.1.min.js}"></script>
+<script type="text/javascript" src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+<!-- <script type="text/javascript" src="../static/jquery-ui/jquery-ui.js" th:src="@{/jquery-ui/jquery-ui.js}"></script> -->
+<script type="text/javascript" src="../static/datetimepicker/jquery.datetimepicker.full.js" th:src="@{/datetimepicker/jquery.datetimepicker.full.js}"></script> 
+<script type="text/javascript" src="../static/js/register.js" th:src="@{/js/register.js}"></script>
+<script type="text/javascript">
+	
+</script>
+</html>
